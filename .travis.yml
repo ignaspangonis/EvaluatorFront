@@ -1,8 +1,13 @@
 language: node_js
 node_js:
   - "11"
-cache: yarn
+dist: trusty
+sudo: required
+branches:
+  only:
+    - master
+before_script:
+  - npm install -g @angular/cli
 script:
-  - yarn lint
-  - yarn test --watch=false --browsers=ChromeHeadless
-  - yarn build --prod
+  - ng lint
+  - ng build --prod
