@@ -1,32 +1,19 @@
-var express = require('express');
-var compression = require('compression');
-var proxy = require('http-proxy-middleware');
-var API_HOST = process.env.API_HOST || 'localhost:8080';
-var PORT = process.env.PORT || 8080
-
-var buildPath = 'dist/EvalutorFront'
-
-// Initialize
-var app = express();
-
-// Serve static resources from 'build' folder
-app.use(express.static(buildPath));
-
-// Enable gzip response compression
-app.use(compression());
-
-// Enable proxy to api
-app.use('/api', proxy({
-target: API_HOST,
-changeOrigin: true,
-pathRewrite: {
-'^/api': ''
+function requireHTTPS(req, res, next) {
+  // The 'x-forwarded-proto' check is for Heroku
+  if (!req.secure && req.get('x-forwarded-proto') !== 'https') {
+    return res.redirect('https://' + req.get('host') + req.url);
+  }
+  next();
 }
-}));
+const express = require('express');
+const app = express();
+app.use(requireHTTPS);
 
-// Otherwise serve index.html
-app.get('*', function (req, res) {
-res.sendFile(__dirname + "/" + buildPath + "/index.html");
+app.use(express.static('./dist/EvalutorFront'));
+
+app.get('/*', function(req, res) {
+  res.sendFile('index.html', {root: 'dist/EvalutorFront/'}
+  );
 });
 
-app.listen(PORT);
+app.listen(process.env.PORT || 8080);
