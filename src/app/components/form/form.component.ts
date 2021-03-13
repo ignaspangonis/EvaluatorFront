@@ -13,9 +13,9 @@ interface Mentor {
 export class FormComponent implements OnInit {
   
   mentor: Mentor[] = [
-    {value: 'Minijus Laukaitis', viewValue: 'Minijus Laukaitis'},
-    {value: 'Darius Pazusinskis', viewValue: 'Darius Pazusinskis'},
-    {value: 'Mantas Boronilščikovas', viewValue: 'Mantas Boronilščikovas'}
+    {value: 'Petras Petraitis', viewValue: 'Petras Petraitis'},
+    {value: 'Vardenis Pavardenis', viewValue: 'Vardenis Pavardenis'},
+    {value: 'Auksinis Kardas', viewValue: 'Auksinis Kardas'}
   ];
 
   constructor() { }
