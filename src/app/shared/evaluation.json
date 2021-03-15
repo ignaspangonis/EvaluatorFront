@@ -1,5 +1,5 @@
 {
-  "evaluations": [
+  "student": [
     {
       "id": "0",
       "name": "Kazys Kazelis",
@@ -11,18 +11,38 @@
       "name": "Mantas Mantelis",
       "img": "https://",
       "isEvaluated": "false"
+    }
+  ],
+  "evaluation": [
+    {
+      "id": "0",
+      "mentorId": "2",
+      "isEvaluated": "true",
+      "participation": "3",
+      "techSkills": "3",
+      "learningPace": "3",
+      "extraMile": "3",
+      "comment": "lorem ipsum (150 chars)",
+      "studentInfo": {
+        "id": "5",
+        "name": "Ronald Lee",
+        "img": "https://"
+      }
     },
     {
-      "id": "2",
-      "name": "Andrius Andrelis",
-      "img": "https://",
-      "isEvaluated": "false"
-    },
-    {
-      "id": "4",
-      "name": "Naujas Naujelis",
-      "img": "https://",
-      "isEvaluated": "true"
+      "id": "1",
+      "mentorId": "2",
+      "isEvaluated": "true",
+      "participation": "3",
+      "techSkills": "3",
+      "learningPace": "3",
+      "extraMile": "3",
+      "comment": "lorem ipsum (150 chars)",
+      "studentInfo": {
+        "id": "6",
+        "name": "Someone",
+        "img": "https://"
+      }
     }
   ]
 }
