@@ -11,10 +11,10 @@ const MaterialComponents = [
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule
-]
+];
 
 @NgModule({
   imports: [MaterialComponents],
   exports: [MaterialComponents]
 })
-export class MaterialModule { }
+export class MaterialModule {}
