@@ -1,22 +1,26 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './pages/home/home.component';
-import { FormComponent } from './pages/form/form.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormComponent } from './views/form/form.component';
+import { HomeComponent } from './views/home/home.component';
+import { MaterialModule } from './material/material.module';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    FormComponent
+    FormComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,19 @@
+.navbar {
+  justify-content: left;
+}
+.navbar a {
+  padding-right: 2rem;
+  text-decoration: none;
+  color: antiquewhite;
+}
+.navbar a:hover {
+  color: green;
+}
+#home-icon {
+  font-size: 36px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+#home-icon:hover {
+  color: green;
+}
