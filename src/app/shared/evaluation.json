@@ -16,33 +16,14 @@
   "evaluation": [
     {
       "id": "0",
-      "mentorId": "2",
+      "studentId": "1",
+      "mentorId": "1",
       "isEvaluated": "true",
       "participation": "3",
       "techSkills": "3",
       "learningPace": "3",
       "extraMile": "3",
       "comment": "lorem ipsum (150 chars)",
-      "studentInfo": {
-        "id": "5",
-        "name": "Ronald Lee",
-        "img": "https://"
-      }
-    },
-    {
-      "id": "1",
-      "mentorId": "2",
-      "isEvaluated": "true",
-      "participation": "3",
-      "techSkills": "3",
-      "learningPace": "3",
-      "extraMile": "3",
-      "comment": "lorem ipsum (150 chars)",
-      "studentInfo": {
-        "id": "6",
-        "name": "Someone",
-        "img": "https://"
-      }
     }
   ]
 }
