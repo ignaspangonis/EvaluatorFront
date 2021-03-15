@@ -1,0 +1,22 @@
+{
+  "evaluations": [
+    {
+      "id": "0",
+      "name": "Kazys Kazelis",
+      "img": "https://",
+      "isEvaluated": "false"
+    },
+    {
+      "id": "1",
+      "name": "Mantas Mantelis",
+      "img": "https://",
+      "isEvaluated": "false"
+    },
+    {
+      "id": "2",
+      "name": "Andrius Andrelis",
+      "img": "https://",
+      "isEvaluated": "false"
+    }
+  ]
+}
