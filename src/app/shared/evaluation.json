@@ -17,6 +17,12 @@
       "name": "Andrius Andrelis",
       "img": "https://",
       "isEvaluated": "false"
+    },
+    {
+      "id": "4",
+      "name": "Naujas Naujelis",
+      "img": "https://",
+      "isEvaluated": "true"
     }
   ]
 }
