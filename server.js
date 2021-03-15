@@ -9,10 +9,10 @@ const express = require('express');
 const app = express();
 app.use(requireHTTPS);
 
-app.use(express.static('./dist/EvalutorFront'));
+app.use(express.static('./dist/evalutor-front'));
 
 app.get('/*', function(req, res) {
-  res.sendFile('index.html', {root: 'dist/EvalutorFront/'}
+  res.sendFile('index.html', {root: 'dist/evalutor-front/'}
   );
 });
 

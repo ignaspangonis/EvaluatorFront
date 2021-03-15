@@ -4,6 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
+    "start:frontend": "ng serve --proxyConfig=proxy.config.json",
+    "start:server": "json-server --watch ./src/app/shared/evaluation.json",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
@@ -22,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~11.2.1",
     "@angular/router": "~11.2.1",
     "express": "^4.17.1",
+    "json-server": "^0.16.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
