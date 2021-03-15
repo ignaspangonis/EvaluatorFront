@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormComponent } from './components/form/form.component';
-import { HomeComponent } from './components/home/home.component';
+import { FormComponent } from './views/form/form.component';
+import { HomeComponent } from './views/home/home.component';
 export { Routes } from '@angular/router';
 
 const routes: Routes = [
