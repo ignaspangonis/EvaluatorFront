@@ -9,10 +9,10 @@ import { StudentService } from '../../services/student.service';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  student: Student[];
+  students: Student[];
   selectedValue: string;
   profileForm: FormGroup;
-  constructor(private studentService: StudentService,private fb: FormBuilder) {}
+  constructor(private studentService: StudentService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
@@ -23,16 +23,16 @@ export class FormComponent implements OnInit {
       extraMile: [''],
       comment: ['']
       });
-    this.getStudent();
+    this.getStudents();
   }
 
-  onSubmit() {};
- 
-  getStudent() {
+  onSubmit() {}
+
+  getStudents() {
     this.studentService.getStudents().subscribe(
       response => {
-        this.student = response;
+        this.students = response;
       }
-    )
-  };
+    );
+  }
 }
