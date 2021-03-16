@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
 import { Student } from 'src/app/shared/student';
 import { StudentService } from '../../services/student.service';
 
@@ -27,8 +26,8 @@ export class FormComponent implements OnInit {
     this.getStudent();
   }
 
-  onSubmit():void{};
-
+  onSubmit() {};
+ 
   getStudent() {
     this.studentService.getStudents().subscribe(
       response => {
