@@ -23,12 +23,11 @@ export class FormComponent implements OnInit {
       learningPace: [''],
       extraMile: [''],
       comment: ['']
-      }),
+      });
     this.getStudent();
   }
 
-  onSubmit(){
-  }
+  onSubmit():void{};
 
   getStudent() {
     this.studentService.getStudents().subscribe(
