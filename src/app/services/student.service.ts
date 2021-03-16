@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Student} from '../shared/student';
-import {Observable} from 'rxjs';
 import {Evaluation} from '../shared/evaluation';
+import {HttpClient} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {Observable} from 'rxjs';
+import {Student} from '../shared/student';
 
 @Injectable({
   providedIn: 'root'
