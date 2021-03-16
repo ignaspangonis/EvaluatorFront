@@ -1,0 +1,29 @@
+{
+  "student": [
+    {
+      "id": "0",
+      "name": "Kazys Kazelis",
+      "img": "https://",
+      "isEvaluated": "false"
+    },
+    {
+      "id": "1",
+      "name": "Mantas Mantelis",
+      "img": "https://",
+      "isEvaluated": "false"
+    }
+  ],
+  "evaluation": [
+    {
+      "id": "0",
+      "studentId": "1",
+      "mentorId": "1",
+      "isEvaluated": "true",
+      "participation": "3",
+      "techSkills": "3",
+      "learningPace": "3",
+      "extraMile": "3",
+      "comment": "lorem ipsum (150 chars)"
+    }
+  ]
+}

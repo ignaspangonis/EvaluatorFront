@@ -3,7 +3,8 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "EvalutorFront": {
+    "evalutor-front": {
+
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/EvalutorFront",
+            "outputPath": "dist/evalutor-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "EvalutorFront:build"
+            "browserTarget": "evalutor-front:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "EvalutorFront:build:production"
+              "browserTarget": "evalutor-front:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "EvalutorFront:build"
+            "browserTarget": "evalutor-front:build"
           }
         },
         "test": {
@@ -115,16 +116,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "EvalutorFront:serve"
+            "devServerTarget": "evalutor-front:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "EvalutorFront:serve:production"
+              "devServerTarget": "evalutor-front:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "EvalutorFront"
+  "defaultProject": "evalutor-front"
 }
