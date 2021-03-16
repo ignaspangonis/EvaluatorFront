@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { Student } from 'src/app/shared/student';
 import { StudentService } from '../../services/student.service';
 
@@ -26,7 +26,15 @@ export class FormComponent implements OnInit {
     this.getStudents();
   }
 
-  onSubmit() {}
+  reset() {
+    this.profileForm.reset();
+  }
+
+  onSubmit() {
+    this.studentService.postEvaluation(this.profileForm.value).subscribe(() => {
+      this.reset();
+    });
+  }
 
   getStudents() {
     this.studentService.getStudents().subscribe(
@@ -34,5 +42,9 @@ export class FormComponent implements OnInit {
         this.students = response;
       }
     );
+  }
+
+  get studentId() {
+    return this.profileForm.get('studentId') as FormControl;
   }
 }
