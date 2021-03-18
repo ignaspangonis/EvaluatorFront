@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
 import { Student } from 'src/app/shared/student';
 import { StudentService } from '../../services/student.service';
 
@@ -12,39 +13,27 @@ export class FormComponent implements OnInit {
   students: Student[];
   selectedValue: string;
   profileForm: FormGroup;
-  constructor(private studentService: StudentService, private fb: FormBuilder) {}
+  constructor(private studentService: StudentService,private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
-      studentId: [''],
-      participation: [''],
-      techSkills: [''],
-      learningPace: [''],
-      extraMile: [''],
+      studentId: [],
+      participation: [],
+      techSkills: [],
+      learningPace: [],
+      extraMile: [],
       comment: ['']
       });
-    this.getStudents();
+    this.getStudent();
   }
 
-  reset() {
-    this.profileForm.reset();
-  }
+  onSubmit():void{};
 
-  onSubmit() {
-    this.studentService.postEvaluation(this.profileForm.value).subscribe(() => {
-      this.reset();
-    });
-  }
-
-  getStudents() {
+  getStudent() {
     this.studentService.getStudents().subscribe(
       response => {
         this.students = response;
       }
-    );
-  }
-
-  get studentId() {
-    return this.profileForm.get('studentId') as FormControl;
-  }
+    )
+  };
 }

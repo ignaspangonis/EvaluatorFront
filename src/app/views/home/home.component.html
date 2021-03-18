@@ -1,3 +1,22 @@
 <div class="container">
-    <p class="container mat-display-4 ">Students</p>
+<mat-grid-list cols="2" rowHeight="3:1">
+    <mat-grid-tile><p class="container mat-display-2 ">Evaluated Students</p></mat-grid-tile>
+    <mat-grid-tile><p class="container mat-display-2 ">Not Evaluated Students</p></mat-grid-tile>
+    <mat-grid-tile>
+        <div class="card">
+            <mat-card class="example-card" *ngFor="let student of students">
+                <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{student.name}}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image src="{{student.img}}" alt="Photo of a Shiba Inu">
+                <mat-card-actions>
+                <button mat-raised-button>Evaluate</button>
+                <button mat-raised-button>View evaluation card</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+  </mat-grid-list>
 </div>

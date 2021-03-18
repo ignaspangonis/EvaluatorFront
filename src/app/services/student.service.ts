@@ -8,7 +8,7 @@ import {Student} from '../shared/student';
   providedIn: 'root'
 })
 export class StudentService {
-  private url = 'http://localhost:3000';
+  private url = 'https://my-evaluation-platform.herokuapp.com/api/mentor/6';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -24,4 +24,13 @@ export class StudentService {
   getEvaluation(id: string): Observable<Student> {
     return this.httpClient.get<Student>(this.url  + `/evaluation/${id}`);
   }
+
+  getEvaluatedStudents(): Observable<Student[]> {
+    return this.httpClient.get<Student[]>(this.url + `/student?isEvaluated=1`);
+  }
+
+  getNotEvaluatedStudents(): Observable<Student[]> {
+    return this.httpClient.get<Student[]>(this.url + `/student?isEvaluated=0`);
+  }
+  
 }

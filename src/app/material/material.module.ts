@@ -1,5 +1,7 @@
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
@@ -14,7 +16,9 @@ const MaterialComponents = [
   MatInputModule,
   MatSelectModule,
   MatRadioModule,
-  MatButtonModule
+  MatButtonModule,
+  MatCardModule,
+  MatGridListModule
 ];
 
 @NgModule({
