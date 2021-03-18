@@ -36,7 +36,6 @@ export class FormComponent implements OnInit {
     this.profileForm.value.techSkills = parseInt(this.profileForm.value.techSkills, 10);
     this.profileForm.value.learningPace = parseInt(this.profileForm.value.learningPace, 10);
     this.profileForm.value.extraMile = parseInt(this.profileForm.value.extraMile, 10);
-    console.log(this.profileForm.value);
     this.studentService.postEvaluation(this.profileForm.value, this.studentId.value).subscribe(() => {
       this.reset();
     });

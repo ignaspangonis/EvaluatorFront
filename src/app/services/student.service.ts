@@ -17,7 +17,6 @@ export class StudentService {
   }
 
   postEvaluation(evaluation: Evaluation, studentId: number): Observable<Evaluation> {
-    console.log(evaluation);
     return this.httpClient.post<Evaluation>(`https://my-evaluation-platform.herokuapp.com/api/evaluation`, evaluation);
   }
 
