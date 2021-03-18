@@ -16,13 +16,17 @@ export class StudentService {
     return this.httpClient.get<Student[]>(this.url + `/student`);
   }
 
-  postEvaluation(evaluation: Evaluation): Observable<Evaluation> {
-    return this.httpClient.post<Evaluation>(this.url  + `/evaluation`, evaluation);
+  postEvaluation(evaluation: Evaluation, studentId: number): Observable<Evaluation> {
+    return this.httpClient.post<Evaluation>(`https://my-evaluation-platform.herokuapp.com/api/evaluation`, evaluation);
   }
 
-  // This method will not used in the 1st sprint:
-  getEvaluation(id: string): Observable<Student> {
-    return this.httpClient.get<Student>(this.url  + `/evaluation/${id}`);
+  // These methods will not used yet:
+  getEvaluation(studentId: number): Observable<Student> {
+    return this.httpClient.get<Student>(this.url  + `/student/${studentId}/evaluation`);
+  }
+
+  putEvaluation(evaluation: Evaluation, studentId: number): Observable<Evaluation> {
+    return this.httpClient.put<Evaluation>(this.url  + `https://my-evaluation-platform.herokuapp.com/api/evaluation`, evaluation);
   }
 
   getEvaluatedStudents(): Observable<Student[]> {
