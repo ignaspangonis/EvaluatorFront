@@ -2,49 +2,56 @@
   <hr>
   Value: {{ profileForm.value | json }}
   <hr>
-<div class="container">
-<mat-form-field appearance="fill">
-  <mat-label>Student</mat-label>
-  <mat-select formControlName="studentId">
-    <mat-option *ngFor="let student of students" [value]="student.id">{{student.name}}</mat-option>
-  </mat-select>
-</mat-form-field>
-<label id="example-radio-group-label">Participation</label>
-<mat-radio-group
-  aria-labelledby="example-radio-group-label"
-  class="example-radio-group" formControlName="participation">
-  <mat-radio-button value="1">Option 1</mat-radio-button>
-  <mat-radio-button value="2">Option 2</mat-radio-button>
-  <mat-radio-button value="3">Option 3</mat-radio-button>
-</mat-radio-group>
-<label id="example-radio-group-label">Technical skills</label>
-<mat-radio-group
-  aria-labelledby="example-radio-group-label"
-  class="example-radio-group" formControlName="techSkills">
-  <mat-radio-button value="1">Option 1</mat-radio-button>
-  <mat-radio-button value="2">Option 2</mat-radio-button>
-  <mat-radio-button value="3">Option 3</mat-radio-button>
-</mat-radio-group>
-<label id="example-radio-group-label">Learning pace</label>
-<mat-radio-group
-  aria-labelledby="example-radio-group-label"
-  class="example-radio-group" formControlName="learningPace">
-  <mat-radio-button value="1">Option 1</mat-radio-button>
-  <mat-radio-button value="2">Option 2</mat-radio-button>
-  <mat-radio-button value="3">Option 3</mat-radio-button>
-</mat-radio-group>
-<label id="example-radio-group-label">Extra mile</label>
-<mat-radio-group
-  aria-labelledby="example-radio-group-label"
-  class="example-radio-group" formControlName="extraMile">
-  <mat-radio-button value="1">Option 1</mat-radio-button>
-  <mat-radio-button value="2">Option 2</mat-radio-button>
-  <mat-radio-button value="3">Option 3</mat-radio-button>
-</mat-radio-group>
-<mat-form-field appearance="fill">
-  <mat-label>Comment</mat-label>
-  <textarea matInput formControlName="comment"></textarea>
-</mat-form-field>
-  <button mat-raised-button color="primary" type="submit">Submit</button>
-</div>
+  <div class="container">
+    <mat-form-field appearance="fill">
+      <mat-label>Student</mat-label>
+      <mat-select formControlName="studentId">
+        <mat-option *ngFor="let student of students" [value]="student.id">{{student.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <label id="example-radio-group-label" class="required-after">Participation</label>
+    <p>Please evaluate activity of the student during the classes (homework, tasks in class).</p>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group" formControlName="participation">
+      <mat-radio-button value="1">Passive</mat-radio-button>
+      <mat-radio-button value="2">Active</mat-radio-button>
+      <mat-radio-button value="3">Very active</mat-radio-button>
+    </mat-radio-group>
+    <label id="example-radio-group-label" class="required-after">Technical skills</label>
+    <p>Please evaluate the technical skills that the student has after the classes.</p>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group" formControlName="techSkills">
+      <mat-radio-button value="1">Beginner</mat-radio-button>
+      <mat-radio-button value="2">Intermediate</mat-radio-button>
+      <mat-radio-button value="3">Advanced</mat-radio-button>
+    </mat-radio-group>
+    <label id="example-radio-group-label" class="required-after">Learning pace</label>
+    <p>Please evaluate the learning pace of the student.</p>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group" formControlName="learningPace">
+      <mat-radio-button value="1">Slow</mat-radio-button>
+      <mat-radio-button value="2">Medium</mat-radio-button>
+      <mat-radio-button value="3">Fast</mat-radio-button>
+    </mat-radio-group>
+    <label id="example-radio-group-label" class="required-after">Extra mile</label>
+    <p>Please evaluate the degree to which the student was proactive, took more responsibilities than were required.</p>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group" formControlName="extraMile">
+      <mat-radio-button value="1">None</mat-radio-button>
+      <mat-radio-button value="2">Some</mat-radio-button>
+      <mat-radio-button value="3">A lot</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field appearance="fill">
+      <mat-label>Comment</mat-label>
+      <textarea matInput formControlName="comment"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <div class="bottom-content">
+      <span class="required-before required-text">Required fields</span>
+    </div>
+  </div>
 </form>
