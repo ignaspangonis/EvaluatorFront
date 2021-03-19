@@ -28,4 +28,18 @@ export class StudentService {
   putEvaluation(evaluation: Evaluation, studentId: number): Observable<Evaluation> {
     return this.httpClient.put<Evaluation>(this.url  + `https://my-evaluation-platform.herokuapp.com/api/evaluation`, evaluation);
   }
+
+  getEvaluatedStudents(): Observable<Student[]> {
+    return this.httpClient.get<Student[]>(this.url + `/student?isEvaluated=1`);
+  }
+
+  getNotEvaluatedStudents(): Observable<Student[]> {
+    return this.httpClient.get<Student[]>(this.url + `/student?isEvaluated=0`);
+  }
+
+  getMentorStudents(): Observable<Student[]> {
+    return this.httpClient.get<Student[]>(this.url + `/student`);
+  }
+
+
 }
