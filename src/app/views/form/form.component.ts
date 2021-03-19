@@ -24,10 +24,8 @@ export class FormComponent implements OnInit {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.id = params.get('id');
-        console.log(this.id);
         this.student$ = this.studentService.getStudentById(this.id);
       });
-    console.log(this.student$);
     this.profileForm = this.fb.group({
       mentorID: [6],
       studentId: [this.id],
