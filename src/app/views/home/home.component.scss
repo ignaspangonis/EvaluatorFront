@@ -2,12 +2,12 @@ p {
   text-align: center;
 }
 .example-card {
-  max-width: 140px;
-  height: max-content;
+  max-width: 250px;
 }
 .card {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 10px;
 }
-

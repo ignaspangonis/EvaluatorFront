@@ -1,22 +1,35 @@
 <div class="container">
-<mat-grid-list cols="2" rowHeight="3:1">
-    <mat-grid-tile><p class="container mat-display-2 ">Evaluated Students</p></mat-grid-tile>
-    <mat-grid-tile><p class="container mat-display-2 ">Not Evaluated Students</p></mat-grid-tile>
-    <mat-grid-tile>
-        <div class="card">
-            <mat-card class="example-card" *ngFor="let student of students">
-                <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>{{student.name}}</mat-card-title>
-                </mat-card-header>
-                <img mat-card-image src="{{student.img}}" alt="Photo of a Shiba Inu">
-                <mat-card-actions>
-                <button mat-raised-button>Evaluate</button>
-                <button mat-raised-button>View evaluation card</button>
-                </mat-card-actions>
-            </mat-card>
-        </div>
-    </mat-grid-tile>
-    <mat-grid-tile></mat-grid-tile>
-  </mat-grid-list>
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Evaluated students">
+            <div class="card">
+                <div *ngFor="let student of students">
+                    <mat-card class="example-card" *ngIf="student.evaluated">                    
+                        <mat-card-header>
+                        <mat-card-title>{{student.name}}</mat-card-title>
+                        </mat-card-header>
+                        <img mat-card-image src="{{student.img}}" alt="{{student.name}}">
+                        <mat-card-actions>
+                        <button mat-raised-button color="accent">View evaluation card</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Not evaluated students">
+            <div class="card">
+                <div *ngFor="let student of students">
+                    <mat-card class="example-card" *ngIf="!student.evaluated">                    
+                        <mat-card-header>
+                        <mat-card-title>{{student.name}}</mat-card-title>
+                        </mat-card-header>
+                        <img mat-card-image src="{{student.img}}" alt="{{student.name}}">
+                        <mat-card-actions>
+                        <button mat-raised-button color="primary">Evaluate</button>
+                        <button mat-raised-button color="accent">View evaluation card</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-tab>
+      </mat-tab-group>
 </div>

@@ -14,15 +14,14 @@ export class HomeComponent implements OnInit {
   constructor(private studentService: StudentService) { }
 
   ngOnInit(): void {
-    this.getEvaluatedStudents();
+    this.getMentorStudents();
   }
- 
-  getEvaluatedStudents() {
-    this.studentService.getEvaluatedStudents().subscribe(
+
+  getMentorStudents() {
+    this.studentService.getMentorStudents().subscribe(
       response => {
         this.students = response;
       }
     )
   };
-
 }
