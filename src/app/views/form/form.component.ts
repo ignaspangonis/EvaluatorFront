@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 import { Student } from 'src/app/shared/student';
 import { StudentService } from '../../services/student.service';
+import {Observable} from 'rxjs';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-form',
@@ -10,22 +13,30 @@ import { StudentService } from '../../services/student.service';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  students: Student[];
   selectedValue: string;
   profileForm: FormGroup;
-  constructor(private studentService: StudentService, private fb: FormBuilder) {}
+  student$: Observable<Student>;
+  id: string;
+
+  constructor(private route: ActivatedRoute, private studentService: StudentService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.id = params.get('id');
+        console.log(this.id);
+        this.student$ = this.studentService.getStudentById(this.id);
+      });
+    console.log(this.student$);
     this.profileForm = this.fb.group({
       mentorID: [6],
-      studentId: [''],
+      studentId: [this.id],
       participation: [''],
       techSkills: [''],
       learningPace: [''],
       extraMile: [''],
       comment: ['']
-      });
-    this.getStudents();
+    });
   }
 
   reset() {
@@ -33,6 +44,7 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.profileForm.value.studentId = parseInt(this.profileForm.value.studentId, 10);
     this.profileForm.value.participation = parseInt(this.profileForm.value.participation, 10);
     this.profileForm.value.techSkills = parseInt(this.profileForm.value.techSkills, 10);
     this.profileForm.value.learningPace = parseInt(this.profileForm.value.learningPace, 10);
@@ -40,14 +52,6 @@ export class FormComponent implements OnInit {
     this.studentService.postEvaluation(this.profileForm.value, this.studentId.value).subscribe(() => {
       this.reset();
     });
-  }
-
-  getStudents() {
-    this.studentService.getStudents().subscribe(
-      response => {
-        this.students = response;
-      }
-    );
   }
 
   get studentId() {
