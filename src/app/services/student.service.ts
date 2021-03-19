@@ -36,7 +36,7 @@ export class StudentService {
   getNotEvaluatedStudents(): Observable<Student[]> {
     return this.httpClient.get<Student[]>(this.url + `/student?isEvaluated=0`);
   }
-  
+
   getMentorStudents(): Observable<Student[]> {
     return this.httpClient.get<Student[]>(this.url + `/student`);
   }

@@ -22,6 +22,6 @@ export class HomeComponent implements OnInit {
       response => {
         this.students = response;
       }
-    )
-  };
+    );
+  }
 }
