@@ -1,6 +1,6 @@
 export interface Student {
   id: string;
   name: string;
-  img?: string;
+  image?: string;
   evaluated: boolean;
 }
