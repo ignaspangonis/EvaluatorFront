@@ -7,9 +7,9 @@ import { NgModule } from '@angular/core';
 export { Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'form', component: FormComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'mentor/6/home', component: HomeComponent },
+  { path: 'mentor/6/student/:id', component: FormComponent },
+  { path: '', redirectTo: 'mentor/6/home', pathMatch: 'full' },
 ];
 
 @NgModule({
