@@ -16,12 +16,16 @@ export class StudentService {
     return this.httpClient.get<Student[]>(this.url + `/student`);
   }
 
+  getStudentById(id: string): Observable<Student> {
+    return this.httpClient.get<Student>(`https://my-evaluation-platform.herokuapp.com/api/student/${id}`);
+  }
+
   postEvaluation(evaluation: Evaluation, studentId: number): Observable<Evaluation> {
     return this.httpClient.post<Evaluation>(`https://my-evaluation-platform.herokuapp.com/api/evaluation`, evaluation);
   }
 
   // These methods will not used yet:
-  getEvaluation(studentId: number): Observable<Student> {
+  getEvaluation(studentId: string): Observable<Student | undefined> {
     return this.httpClient.get<Student>(this.url  + `/student/${studentId}/evaluation`);
   }
 
