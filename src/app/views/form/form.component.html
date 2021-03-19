@@ -3,12 +3,12 @@
   Value: {{ profileForm.value | json }}
   <hr>
   <div class="container">
-    <mat-form-field appearance="fill">
-      <mat-label>Student</mat-label>
-      <mat-select formControlName="studentId">
-        <mat-option *ngFor="let student of students" [value]="student.id">{{student.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <mat-card class="example-card" *ngIf="student$ | async as student">
+      <mat-card-header>
+        <mat-card-title>{{student.name}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
+    </mat-card>
     <label id="example-radio-group-label" class="required-after">Participation</label>
     <p>Please evaluate activity of the student during the classes (homework, tasks in class).</p>
     <mat-radio-group

@@ -3,7 +3,7 @@
         <mat-tab label="Evaluated students">
             <div class="card">
                 <div *ngFor="let student of students">
-                    <mat-card class="example-card" *ngIf="student.evaluated">                    
+                    <mat-card class="example-card" *ngIf="student.evaluated">
                         <mat-card-header>
                         <mat-card-title>{{student.name}}</mat-card-title>
                         </mat-card-header>
@@ -18,13 +18,13 @@
         <mat-tab label="Not evaluated students">
             <div class="card">
                 <div *ngFor="let student of students">
-                    <mat-card class="example-card" *ngIf="!student.evaluated">                    
+                    <mat-card class="example-card" *ngIf="!student.evaluated">
                         <mat-card-header>
                         <mat-card-title>{{student.name}}</mat-card-title>
                         </mat-card-header>
                         <img mat-card-image src="{{student.img}}" alt="{{student.name}}">
                         <mat-card-actions>
-                        <button mat-raised-button color="primary">Evaluate</button>
+                          <a mat-raised-button color="primary" [routerLink]="['/mentor/6/student/', student.id]">Evaluate</a>
                         <button mat-raised-button color="accent">View evaluation card</button>
                         </mat-card-actions>
                     </mat-card>
