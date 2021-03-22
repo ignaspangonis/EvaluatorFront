@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Mentor } from 'src/app/shared/mentor';
+import { MentorService } from 'src/app/services/mentor.service';
 import { Student } from 'src/app/shared/student';
 import { StudentService } from 'src/app/services/student.service';
 
@@ -10,17 +12,28 @@ import { StudentService } from 'src/app/services/student.service';
 })
 export class HomeComponent implements OnInit {
   students: Student[];
-
-  constructor(private studentService: StudentService) { }
+  mentor: Mentor;
+  mentorStream;
+  constructor(private studentService: StudentService,  private mentorService: MentorService) { }
 
   ngOnInit(): void {
     this.getMentorStudents();
+    this.getMentor();
   }
 
   getMentorStudents() {
     this.studentService.getMentorStudents().subscribe(
       response => {
         this.students = response;
+      }
+    );
+  }
+
+  getMentor() {
+    this.mentorService.getMentor().subscribe(
+      response => {
+        this.mentor = response;
+        this.mentorStream = this.mentor.stream;
       }
     );
   }

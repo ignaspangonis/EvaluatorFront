@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
+import { Mentor } from 'src/app/shared/mentor';
+import { MentorService } from 'src/app/services/mentor.service';
 import { Student } from 'src/app/shared/student';
 import { StudentService } from '../../services/student.service';
 
