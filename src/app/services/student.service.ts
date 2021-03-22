@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Student} from '../shared/student';
+import {EvaluationCard} from '../shared/evaluation-card';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,7 @@ export class StudentService {
     return this.httpClient.get<Student[]>(this.url + `/student`);
   }
 
-
+  getJointEvaluation(studentId: string): Observable<EvaluationCard | undefined> {
+    return this.httpClient.get<EvaluationCard>(`https://my-evaluation-platform.herokuapp.com/api/student/${studentId}/jointEvaluation`);
+  }
 }
