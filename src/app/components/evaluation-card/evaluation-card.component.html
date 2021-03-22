@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>{{ data.stud.name }}'s evaluation card</h1>
+<img src="{{data.stud.image}}" alt="{{data.stud.name}}">
+<div mat-dialog-content >
+  <h2>Streams</h2>
+  <div class="stream-section">
+    <div class="stream">
+      <h3>Frontend</h3>
+      <div *ngIf="card.feEvaluationDTO; else absentFront">
+        <div class="mat-h4">Participation:    {{card.feEvaluationDTO.participation}}</div>
+        <div class="mat-h4">Technical skills: {{card.feEvaluationDTO.techSkills}}</div>
+        <div class="mat-h4">Learning pace:    {{card.feEvaluationDTO.learningPace}}</div>
+        <div class="mat-h4">Extra mile:       {{card.feEvaluationDTO.extraMile}}</div>
+        <div class="mat-h4">Joint evaluation: {{card.feEvaluationDTO.jointEvaluation}}</div>
+      </div>
+      <ng-template #absentFront>No evaluations in this stream yet!</ng-template>
+    </div>
+    <div class="stream">
+      <h3>Backend</h3>
+      <div *ngIf="card.beEvaluationDTO; else absentBack">
+        <div class="mat-h4">Participation:    {{card.beEvaluationDTO.participation}}</div>
+        <div class="mat-h4">Technical skills: {{card.beEvaluationDTO.techSkills}}</div>
+        <div class="mat-h4">Learning pace:    {{card.beEvaluationDTO.learningPace}}</div>
+        <div class="mat-h4">Extra mile:       {{card.beEvaluationDTO.extraMile}}</div>
+        <div class="mat-h4">Joint evaluation: {{card.beEvaluationDTO.jointEvaluation}}</div>
+      </div>
+      <ng-template #absentBack>No evaluations in this stream yet!</ng-template>
+    </div>
+    <div class="stream">
+      <h3>QA</h3>
+      <div *ngIf="card.feEvaluationDTO; else absentQA">
+        <div class="mat-h4">Participation:    {{card.qaEvaluationDTO.participation}}</div>
+        <div class="mat-h4">Technical skills: {{card.qaEvaluationDTO.techSkills}}</div>
+        <div class="mat-h4">Learning pace:    {{card.qaEvaluationDTO.learningPace}}</div>
+        <div class="mat-h4">Extra mile:       {{card.qaEvaluationDTO.extraMile}}</div>
+        <div class="mat-h4">Joint evaluation: {{card.qaEvaluationDTO.jointEvaluation}}</div>
+      </div>
+      <ng-template #absentQA>No evaluations in this stream yet!</ng-template>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>
+<p> <br><br><br>
+  Card: {{ this.card | json }}
+</p>
+
