@@ -8,6 +8,9 @@ import { StudentService } from '../../services/student.service';
 import {Observable} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import {Evaluation} from '../../shared/evaluation';
+import { filter } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-form',
@@ -19,8 +22,11 @@ export class FormComponent implements OnInit {
   profileForm: FormGroup;
   student$: Observable<Student>;
   id: string;
+  isEvaluated: string;
+  evaluation$: Observable<Evaluation>;
+  evaluation: Evaluation;
 
-  constructor(private route: ActivatedRoute, private studentService: StudentService, private fb: FormBuilder) {}
+  constructor(private route: ActivatedRoute, private studentService: StudentService, private fb: FormBuilder, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -28,6 +34,13 @@ export class FormComponent implements OnInit {
         this.id = params.get('id');
         this.student$ = this.studentService.getStudentById(this.id);
       });
+
+      this.activatedRoute.queryParams.subscribe(params => {
+        this.isEvaluated = params['isEvaluated'];
+        console.log(this.isEvaluated);
+      });
+  
+
     this.profileForm = this.fb.group({
       mentorID: [6],
       studentId: [this.id],
@@ -35,8 +48,26 @@ export class FormComponent implements OnInit {
       techSkills: [''],
       learningPace: [''],
       extraMile: [''],
-      comment: ['']
+      comment: [''],
+      evaluationId: [''],
     });
+
+    if (this.isEvaluated=="true"){
+      this.studentService.getEvaluation(this.id).subscribe((evaluation)=> {this.evaluation = evaluation,
+        this.profileForm.patchValue({mentorID: this.evaluation.mentorID,
+          studentId: this.evaluation.studentId,
+           participation: this.evaluation.participation.toString(),
+           techSkills: this.evaluation.techSkills.toString(),
+           learningPace: this.evaluation.learningPace.toString(),
+           extraMile: this.evaluation.extraMile.toString(),
+           comment: this.evaluation.comment,
+           evaluationId: this.evaluation.id
+           
+       })
+       console.log(this.profileForm.value)});
+       
+    }
+
   }
 
   reset() {

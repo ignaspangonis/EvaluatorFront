@@ -25,8 +25,8 @@ export class StudentService {
   }
 
   // These methods will not used yet:
-  getEvaluation(studentId: string): Observable<Student | undefined> {
-    return this.httpClient.get<Student>(this.url  + `/student/${studentId}/evaluation`);
+  getEvaluation(studentId: string): Observable<Evaluation | undefined> {
+    return this.httpClient.get<Evaluation>(this.url  + `/student/${studentId}/evaluation`);
   }
 
   putEvaluation(evaluation: Evaluation, studentId: number): Observable<Evaluation> {
