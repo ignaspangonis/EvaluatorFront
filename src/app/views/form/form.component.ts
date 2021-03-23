@@ -27,8 +27,7 @@ export class FormComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private studentService: StudentService,
-              private fb: FormBuilder,
-              private el: ElementRef) { }
+              private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -104,7 +103,6 @@ export class FormComponent implements OnInit {
   onSubmit() {
     if (!this.profileForm.valid) {
       this.isValid = false;
-      this.profileForm.markAllAsTouched();
       this.scrollToError();
       return;
     }
@@ -125,7 +123,6 @@ export class FormComponent implements OnInit {
   }
 
   private scrollToError() {
-    // this.el.nativeElement.
     const firstInvalidControl = document.querySelector(
       '.ng-invalid[formControlName]'
     );
