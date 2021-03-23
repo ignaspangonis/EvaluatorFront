@@ -21,7 +21,6 @@ export class EvaluationCardComponent implements OnInit {
     this.studentService.getJointEvaluation(this.data.stud.id).subscribe(
       response => {
         this.card = response;
-        // console.log(this.card.beEvaluationDTO);
       }
     );
   }
