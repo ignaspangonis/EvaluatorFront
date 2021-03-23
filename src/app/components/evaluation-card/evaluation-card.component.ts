@@ -12,7 +12,7 @@ import {Observable} from 'rxjs';
 })
 export class EvaluationCardComponent implements OnInit {
 
-  public card: EvaluationCard;
+  public card: EvaluationCard = null;
 
   constructor(private studentService: StudentService,
               @Inject(MAT_DIALOG_DATA) public data: {stud: Student}) { }
@@ -21,6 +21,7 @@ export class EvaluationCardComponent implements OnInit {
     this.studentService.getJointEvaluation(this.data.stud.id).subscribe(
       response => {
         this.card = response;
+        // console.log(this.card.beEvaluationDTO);
       }
     );
   }
