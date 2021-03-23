@@ -1,10 +1,11 @@
 export interface Evaluation {
-  mentorId: number;
+  id: number;
+  mentorID: number;
   studentId: number;
-  isEvaluated?: boolean;
-  participation?: number;
-  techSkills?: number;
-  learningPace?: number;
-  extraMile?: number;
-  comment: string;
+  isEvaluated: boolean;
+  participation: number;
+  techSkills: number;
+  learningPace: number;
+  extraMile: number;
+  comment?: string;
 }
