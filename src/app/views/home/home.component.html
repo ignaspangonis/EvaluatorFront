@@ -15,7 +15,7 @@
                         <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
                         <mat-card-actions>
                             <a mat-raised-button color="primary" [routerLink]="['/mentor/6/student/', student.id]" [queryParams]= "{isEvaluated: 'true'}" class = "myButton">Edit evaluation</a>
-                        <button mat-raised-button color="accent" class = "myButton viewButton">View evaluation card</button>
+                        <button mat-raised-button color="accent" (click)="openDialog(student)" class = "myButton viewButton">View evaluation card</button>
                         </mat-card-actions>
                     </mat-card>
                 </div>
@@ -31,7 +31,7 @@
                         <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
                         <mat-card-actions>
                           <a mat-raised-button color="primary" [routerLink]="['/mentor/6/student/', student.id]" [queryParams]= "{isEvaluated: 'false'}">Evaluate</a>
-                          <button mat-raised-button color="accent">View evaluation card</button>
+                          <button mat-raised-button color="accent" (click)="openDialog(student)">View evaluation card</button>
                         </mat-card-actions>
                     </mat-card>
                 </div>
