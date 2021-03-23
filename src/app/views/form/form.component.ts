@@ -33,12 +33,12 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
-        this.id = params.get("id");
+        this.id = params.get('id');
         this.student$ = this.studentService.getStudentById(this.id);
       });
 
       this.activatedRoute.queryParams.subscribe(params => {
-        this.isEvaluated = params["isEvaluated"];
+        this.isEvaluated = params['isEvaluated'];
       });
   
 
@@ -83,7 +83,7 @@ export class FormComponent implements OnInit {
     this.profileForm.value.techSkills = parseInt(this.profileForm.value.techSkills, 10);
     this.profileForm.value.learningPace = parseInt(this.profileForm.value.learningPace, 10);
     this.profileForm.value.extraMile = parseInt(this.profileForm.value.extraMile, 10);
-    if (this.isEvaluated=="false"){
+    if (this.isEvaluated==="false"){
     this.studentService.postEvaluation(this.profileForm.value, this.studentId.value).subscribe(() => {
       this.reset();
     });}
