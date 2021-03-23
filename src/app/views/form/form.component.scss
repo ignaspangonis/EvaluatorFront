@@ -9,7 +9,7 @@ div.container {
 .example-radio-group {
   display: flex;
   flex-direction: column;
-  margin: 0 0 10px 0;
+  margin: 10px 0;
 }
 
 .example-radio-button {
@@ -32,20 +32,10 @@ mat-form-field {
   margin-top: 10px;
 }
 
-.bottom-content {
-  padding-top:10px;
-}
-
-.required-before:before {
-  content:" *";
-  color: red;
-}
-
-.required-after:after {
-  content:" *";
-  color: red;
-}
-
 .example-card {
   max-width: 150px;
+}
+
+p {
+  margin-bottom: 0px;
 }
