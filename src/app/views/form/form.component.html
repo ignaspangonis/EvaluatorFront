@@ -73,10 +73,16 @@
       <mat-radio-button value="2">Some</mat-radio-button>
       <mat-radio-button value="3">A lot</mat-radio-button>
     </mat-radio-group>
+
+    <label id="example-radio-group-label" class="required-after">Comment</label>
+    <div>
+      {{ charsRemaining$ | async }}/{{ maxCharacters }} characters left.
+    </div>
     <mat-form-field appearance="fill">
       <mat-label>Comment</mat-label>
-      <textarea matInput formControlName="comment"></textarea>
+      <textarea matInput formControlName="comment" maxlength="150"></textarea>
     </mat-form-field>
+
     <button mat-raised-button color="primary" type="submit">Submit</button>
   </div>
 </form>
