@@ -25,19 +25,20 @@ export class FormComponent implements OnInit {
   isEvaluated: string;
   evaluation$: Observable<Evaluation>;
   evaluation: Evaluation;
+  evaluationId:number;
 
-  constructor(private route: ActivatedRoute, private studentService: StudentService, private fb: FormBuilder, private activatedRoute: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private studentService: StudentService, private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
-        this.id = params.get('id');
+        this.id = params.get("id");
         this.student$ = this.studentService.getStudentById(this.id);
       });
 
       this.activatedRoute.queryParams.subscribe(params => {
-        this.isEvaluated = params['isEvaluated'];
-        console.log(this.isEvaluated);
+        this.isEvaluated = params["isEvaluated"];
       });
   
 
@@ -49,10 +50,10 @@ export class FormComponent implements OnInit {
       learningPace: [''],
       extraMile: [''],
       comment: [''],
-      evaluationId: [''],
+      // evaluationId: [''],
     });
 
-    if (this.isEvaluated=="true"){
+    if (this.isEvaluated==="true"){
       this.studentService.getEvaluation(this.id).subscribe((evaluation)=> {this.evaluation = evaluation,
         this.profileForm.patchValue({mentorID: this.evaluation.mentorID,
           studentId: this.evaluation.studentId,
@@ -61,10 +62,12 @@ export class FormComponent implements OnInit {
            learningPace: this.evaluation.learningPace.toString(),
            extraMile: this.evaluation.extraMile.toString(),
            comment: this.evaluation.comment,
-           evaluationId: this.evaluation.id
+          //  evaluationId: this.evaluation.id
            
        })
-       console.log(this.profileForm.value)});
+       console.log(this.profileForm.value)
+       this.evaluationId = this.evaluation.id;
+      });
        
     }
 
@@ -80,9 +83,17 @@ export class FormComponent implements OnInit {
     this.profileForm.value.techSkills = parseInt(this.profileForm.value.techSkills, 10);
     this.profileForm.value.learningPace = parseInt(this.profileForm.value.learningPace, 10);
     this.profileForm.value.extraMile = parseInt(this.profileForm.value.extraMile, 10);
+    if (this.isEvaluated=="false"){
     this.studentService.postEvaluation(this.profileForm.value, this.studentId.value).subscribe(() => {
       this.reset();
-    });
+    });}
+    else{
+      console.log(this.profileForm.value)
+      this.studentService.putEvaluation(this.profileForm.value, this.evaluationId).subscribe(() => {
+        this.reset();
+      });
+    }
+  
   }
 
   get studentId() {

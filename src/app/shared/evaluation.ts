@@ -1,5 +1,5 @@
 export interface Evaluation {
-  id:number;
+  id: number;
   mentorID: number;
   studentId: number;
   isEvaluated: boolean;
