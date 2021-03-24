@@ -1,3 +1,8 @@
+.mat-card-header .mat-card-title{
+  position: absolute;
+  left: 0px;
+  top: 198px;
+}
 div.container {
   max-width: 960px;
   margin: auto;
@@ -30,7 +35,12 @@ mat-radio-button {
 }
 
 mat-form-field {
+  width: 70%;
   margin-top: 10px;
+}
+
+.bottom-content {
+  padding-top:10px;
 }
 
 .example-card {

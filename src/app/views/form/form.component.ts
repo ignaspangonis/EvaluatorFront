@@ -7,7 +7,10 @@ import {StudentService} from '../../services/student.service';
 import {concat, Observable, of} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Evaluation} from '../../shared/evaluation';
+
 import {map} from 'rxjs/operators';
+import { Router } from '@angular/router';
+import {EvaluationService} from '../../services/evaluation.service';
 
 @Component({
   selector: 'app-form',
@@ -27,9 +30,8 @@ export class FormComponent implements OnInit {
   @Input()
   maxlength: string | number;
 
-  constructor(private route: ActivatedRoute,
-              private studentService: StudentService,
-              private fb: FormBuilder) { }
+  constructor(private route: ActivatedRoute, private studentService: StudentService, private fb: FormBuilder,
+              private router: Router, private evaluationService: EvaluationService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -122,6 +124,8 @@ export class FormComponent implements OnInit {
         this.reset();
       });
     }
+    this.evaluationService.setIsEvaluationSaved(true);
+    this.router.navigate(['mentor/6/home']);
   }
 
   private scrollToError() {

@@ -4,10 +4,10 @@
 <!--  <hr>-->
   <div class="container">
     <mat-card class="example-card" *ngIf="student$ | async as student">
+      <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
       <mat-card-header>
         <mat-card-title>{{student.name}}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
     </mat-card>
 
     <label for="participation" id="example-radio-group-label">Participation</label>
