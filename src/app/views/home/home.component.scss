@@ -12,9 +12,19 @@ p {
   justify-content: flex-start;
   margin: 10px;
 }
-.mat-card-title{
+.mat-card-title {
   text-align: center;
 }
-::ng-deep .mat-tab-label{
+
+::ng-deep .mat-tab-label {
   font-size: 19px;
 }
+
+.savedEvaluationText {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 1.2em;
+  color:rebeccapurple;
+  height: 20px;
+}
+

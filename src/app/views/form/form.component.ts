@@ -7,6 +7,8 @@ import {StudentService} from '../../services/student.service';
 import {Observable} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Evaluation} from '../../shared/evaluation';
+import { Router } from '@angular/router';
+import {EvaluationService} from '../../services/evaluation.service';
 
 @Component({
   selector: 'app-form',
@@ -21,7 +23,8 @@ export class FormComponent implements OnInit {
   evaluation: Evaluation;
   evaluationId: number;
 
-  constructor(private route: ActivatedRoute, private studentService: StudentService, private fb: FormBuilder) { }
+  constructor(private route: ActivatedRoute, private studentService: StudentService, private fb: FormBuilder,
+              private router: Router, private evaluationService: EvaluationService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -80,6 +83,8 @@ export class FormComponent implements OnInit {
         this.reset();
       });
     }
+    this.evaluationService.setIsEvaluationSaved(true);
+    this.router.navigate(['mentor/6/home']);
   }
 
   get studentId() {
