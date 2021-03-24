@@ -29,6 +29,7 @@ mat-radio-button {
 }
 
 mat-form-field {
+  width: 70%;
   margin-top: 10px;
 }
 
@@ -36,16 +37,7 @@ mat-form-field {
   padding-top:10px;
 }
 
-.required-before:before {
-  content:" *";
-  color: red;
-}
-
-.required-after:after {
-  content:" *";
-  color: red;
-}
-
 .example-card {
   max-width: 150px;
 }
+

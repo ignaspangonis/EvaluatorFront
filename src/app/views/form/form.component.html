@@ -4,10 +4,10 @@
   <hr>
   <div class="container">
     <mat-card class="example-card" *ngIf="student$ | async as student">
+      <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
       <mat-card-header>
         <mat-card-title>{{student.name}}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
     </mat-card>
     <label id="example-radio-group-label" class="required-after">Participation</label>
     <p>Please evaluate activity of the student during the classes (homework, tasks in class).</p>
@@ -45,6 +45,7 @@
       <mat-radio-button value="2">Some</mat-radio-button>
       <mat-radio-button value="3">A lot</mat-radio-button>
     </mat-radio-group>
+    <label id="example-radio-group-label" class="required-after">Comments (optional)</label>
     <mat-form-field appearance="fill">
       <mat-label>Comment</mat-label>
       <textarea matInput formControlName="comment"></textarea>
