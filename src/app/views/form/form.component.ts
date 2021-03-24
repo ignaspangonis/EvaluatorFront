@@ -74,6 +74,7 @@ export class FormComponent implements OnInit {
         return this.maxCharacters - (content?.length || 0);
       })
     );
+    this.evaluationService.isEvaluationSaved = false;
   }
 
   get studentId() {
