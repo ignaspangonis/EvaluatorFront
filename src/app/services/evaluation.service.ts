@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Mentor} from '../shared/mentor';
 
@@ -8,15 +8,16 @@ import {Mentor} from '../shared/mentor';
 export class EvaluationService {
 
   isEvaluationSaved: boolean;
+
   constructor() {
     this.isEvaluationSaved = false;
   }
 
-  getIsEvaluationSaved(): boolean{
+  getIsEvaluationSaved(): boolean {
     return this.isEvaluationSaved;
   }
 
-  setIsEvaluationSaved(isEvaluationSaved: boolean): void{
-    this.isEvaluationSaved = true;
+  setIsEvaluationSaved(isEvaluationSaved: boolean): void {
+    this.isEvaluationSaved = isEvaluationSaved;
   }
 }
