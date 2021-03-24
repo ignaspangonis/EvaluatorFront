@@ -24,6 +24,8 @@ export class FormComponent implements OnInit {
   maxCharacters = 150;
   charsRemaining$: Observable<number>;
   isValid = true;
+  @Input()
+  maxlength: string | number;
 
   constructor(private route: ActivatedRoute,
               private studentService: StudentService,

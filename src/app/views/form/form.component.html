@@ -79,8 +79,7 @@
       {{ charsRemaining$ | async }}/{{ maxCharacters }} characters left.
     </div>
     <mat-form-field appearance="fill">
-      <mat-label>Comment</mat-label>
-      <textarea matInput formControlName="comment" maxlength="150"></textarea>
+      <textarea matInput formControlName="comment" ngModel maxlength="25"></textarea>
     </mat-form-field>
 
     <button mat-raised-button color="primary" type="submit">Submit</button>
