@@ -8,6 +8,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatDialogModule} from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 
 const MaterialComponents = [
@@ -20,7 +21,8 @@ const MaterialComponents = [
   MatButtonModule,
   MatCardModule,
   MatGridListModule,
-  MatTabsModule
+  MatTabsModule,
+  MatDialogModule
 ];
 
 @NgModule({

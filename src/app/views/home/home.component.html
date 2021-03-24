@@ -3,34 +3,34 @@
         <mat-toolbar>
           <span>You are evaluating {{mentorStream}} students</span>
         </mat-toolbar>
+      <mat-toolbar class = "savedEvaluationText" *ngIf="isEvaluationSaved">
+      <span>Your evaluation has been saved!</span>
+      </mat-toolbar>
     </p>
     <mat-tab-group mat-align-tabs="center">
-        <mat-tab label="Evaluated students">
+        <mat-tab label="Not evaluated students">
             <div class="card">
                 <div *ngFor="let student of students">
-                    <mat-card class="example-card" *ngIf="student.evaluated">
-                        <mat-card-header>
-                        <mat-card-title>{{student.name}}</mat-card-title>
-                        </mat-card-header>
+                    <mat-card class="example-card" *ngIf="!student.evaluated">
                         <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
+                        <mat-card-title>{{student.name}}</mat-card-title>
                         <mat-card-actions>
-                        <button mat-raised-button color="accent">View evaluation card</button>
+                          <a mat-raised-button color="primary" [routerLink]="['/mentor/6/student/', student.id]" [queryParams]= "{isEvaluated: 'false'}">Evaluate student</a>
+                          <button mat-raised-button color="accent" (click)="openDialog(student)">View form</button>
                         </mat-card-actions>
                     </mat-card>
                 </div>
             </div>
         </mat-tab>
-        <mat-tab label="Not evaluated students">
+        <mat-tab label="Evaluated students">
             <div class="card">
                 <div *ngFor="let student of students">
-                    <mat-card class="example-card" *ngIf="!student.evaluated">
-                        <mat-card-header>
-                        <mat-card-title>{{student.name}}</mat-card-title>
-                        </mat-card-header>
+                    <mat-card class="example-card" *ngIf="student.evaluated">
                         <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
+                        <mat-card-title>{{student.name}}</mat-card-title>
                         <mat-card-actions>
-                          <a mat-raised-button color="primary" [routerLink]="['/mentor/6/student/', student.id]">Evaluate</a>
-                        <button mat-raised-button color="accent">View evaluation card</button>
+                            <a mat-raised-button color="primary" [routerLink]="['/mentor/6/student/', student.id]" [queryParams]= "{isEvaluated: 'true'}">Edit evaluation</a>
+                        <button mat-raised-button color="accent" (click)="openDialog(student)">View form</button>
                         </mat-card-actions>
                     </mat-card>
                 </div>

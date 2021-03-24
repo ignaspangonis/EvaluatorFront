@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Student} from '../shared/student';
+import {EvaluationCard} from '../shared/evaluation-card';
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +26,12 @@ export class StudentService {
   }
 
   // These methods will not used yet:
-  getEvaluation(studentId: string): Observable<Student | undefined> {
-    return this.httpClient.get<Student>(this.url  + `/student/${studentId}/evaluation`);
+  getEvaluation(studentId: string): Observable<Evaluation | undefined> {
+    return this.httpClient.get<Evaluation>(this.url  + `/student/${studentId}/evaluation`);
   }
 
-  putEvaluation(evaluation: Evaluation, studentId: number): Observable<Evaluation> {
-    return this.httpClient.put<Evaluation>(this.url  + `https://my-evaluation-platform.herokuapp.com/api/evaluation`, evaluation);
+  putEvaluation(evaluation: Evaluation, id: number): Observable<Evaluation> {
+    return this.httpClient.put<Evaluation>(`https://my-evaluation-platform.herokuapp.com/api/evaluation/${id}`, evaluation);
   }
 
   getEvaluatedStudents(): Observable<Student[]> {
@@ -45,5 +46,7 @@ export class StudentService {
     return this.httpClient.get<Student[]>(this.url + `/student`);
   }
 
-
+  getJointEvaluation(studentId: string): Observable<EvaluationCard | undefined> {
+    return this.httpClient.get<EvaluationCard>(`https://my-evaluation-platform.herokuapp.com/api/student/${studentId}/jointEvaluation`);
+  }
 }

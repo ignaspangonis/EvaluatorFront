@@ -9,14 +9,17 @@ import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EvaluationCardComponent } from './components/evaluation-card/evaluation-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FormComponent,
-    NavbarComponent
+    NavbarComponent,
+    EvaluationCardComponent
   ],
+  entryComponents: [EvaluationCardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
