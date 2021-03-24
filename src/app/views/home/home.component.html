@@ -3,6 +3,9 @@
         <mat-toolbar>
           <span>You are evaluating {{mentorStream}} students</span>
         </mat-toolbar>
+      <mat-toolbar class = "savedEvaluationText" *ngIf="isEvaluationSaved">
+      <span>Your evaluation has been saved!</span>
+      </mat-toolbar>
     </p>
     <mat-tab-group mat-align-tabs="center">
         <mat-tab label="Evaluated students">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 import { Mentor } from 'src/app/shared/mentor';
 import { MentorService } from 'src/app/services/mentor.service';
@@ -6,6 +6,8 @@ import { Student } from 'src/app/shared/student';
 import { StudentService } from 'src/app/services/student.service';
 import {MatDialog} from '@angular/material/dialog';
 import {EvaluationCardComponent} from '../../components/evaluation-card/evaluation-card.component';
+import {EvaluationService} from '../../services/evaluation.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -13,15 +15,26 @@ import {EvaluationCardComponent} from '../../components/evaluation-card/evaluati
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  isEvaluationSaved: boolean;
   students: Student[];
   mentor: Mentor;
   mentorStream;
-  constructor(public dialog: MatDialog, private studentService: StudentService,  private mentorService: MentorService) { }
+  constructor(public dialog: MatDialog, private studentService: StudentService,  private mentorService: MentorService,
+              private evaluationService: EvaluationService) { }
 
   ngOnInit(): void {
     this.getMentorStudents();
     this.getMentor();
+    this.isEvaluationSaved = this.evaluationService.getIsEvaluationSaved();
+    if (this.isEvaluationSaved){
+      setTimeout(() => {
+        this.isEvaluationSaved = false;
+        this.evaluationService.setIsEvaluationSaved(false);
+      }, 6000);
+    }
+
   }
+
 
   openDialog(student: Student) {
     this.dialog.open(EvaluationCardComponent, {
