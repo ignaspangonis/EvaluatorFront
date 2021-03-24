@@ -1,12 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {Component, ElementRef, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 import {Student} from 'src/app/shared/student';
 import {StudentService} from '../../services/student.service';
-import {Observable} from 'rxjs';
+import {concat, Observable, of} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Evaluation} from '../../shared/evaluation';
+
+import {map} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {EvaluationService} from '../../services/evaluation.service';
 
@@ -22,6 +24,11 @@ export class FormComponent implements OnInit {
   isEvaluated: string;
   evaluation: Evaluation;
   evaluationId: number;
+  maxCharacters = 150;
+  charsRemaining$: Observable<number>;
+  isValid = true;
+  @Input()
+  maxlength: string | number;
 
   constructor(private route: ActivatedRoute, private studentService: StudentService, private fb: FormBuilder,
               private router: Router, private evaluationService: EvaluationService) { }
@@ -39,12 +46,12 @@ export class FormComponent implements OnInit {
 
     this.profileForm = this.fb.group({
       mentorID: [6],
-      studentId: [this.id],
-      participation: [''],
-      techSkills: [''],
-      learningPace: [''],
-      extraMile: [''],
-      comment: ['']
+      studentId: [this.id, [Validators.required]],
+      participation: ['', [Validators.required]],
+      techSkills: ['', [Validators.required]],
+      learningPace: ['', [Validators.required]],
+      extraMile: ['', [Validators.required]],
+      comment: ['', [Validators.maxLength(this.maxCharacters)]]
     });
 
     if (this.isEvaluated === 'true') {
@@ -62,6 +69,35 @@ export class FormComponent implements OnInit {
         this.evaluationId = this.evaluation.id;
       });
     }
+    this.charsRemaining$ = concat(of(''), this.comment.valueChanges).pipe(
+      map((content) => {
+        return this.maxCharacters - (content?.length || 0);
+      })
+    );
+  }
+
+  get studentId() {
+    return this.profileForm.get('studentId') as FormControl;
+  }
+
+  get participation() {
+    return this.profileForm.get('participation') as FormControl;
+  }
+
+  get techSkills() {
+    return this.profileForm.get('techSkills') as FormControl;
+  }
+
+  get learningPace() {
+    return this.profileForm.get('learningPace') as FormControl;
+  }
+
+  get extraMile() {
+    return this.profileForm.get('extraMile') as FormControl;
+  }
+
+  get comment() {
+    return this.profileForm.get('comment') as FormControl;
   }
 
   reset() {
@@ -69,6 +105,11 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (!this.profileForm.valid) {
+      this.isValid = false;
+      this.scrollToError();
+      return;
+    }
     this.profileForm.value.studentId = parseInt(this.profileForm.value.studentId, 10);
     this.profileForm.value.participation = parseInt(this.profileForm.value.participation, 10);
     this.profileForm.value.techSkills = parseInt(this.profileForm.value.techSkills, 10);
@@ -87,7 +128,10 @@ export class FormComponent implements OnInit {
     this.router.navigate(['mentor/6/home']);
   }
 
-  get studentId() {
-    return this.profileForm.get('studentId') as FormControl;
+  private scrollToError() {
+    const firstInvalidControl = document.querySelector(
+      '.ng-invalid[formControlName]'
+    );
+    firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
