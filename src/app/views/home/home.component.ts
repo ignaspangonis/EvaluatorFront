@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
   openDialog(student: Student) {
     this.dialog.open(EvaluationCardComponent, {
       data: { stud: student },
-      width: '600px',
+      width: '900px',
       height: '600px'
     });
   }
