@@ -10,7 +10,7 @@
     <mat-tab-group mat-align-tabs="center">
         <mat-tab label="Not evaluated students">
             <div class="card">
-                <div *ngFor="let student of students">
+                <div *ngFor="let student of students$ | async">
                     <mat-card class="example-card" *ngIf="!student.evaluated">
                         <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
                         <mat-card-title>{{student.name}}</mat-card-title>
@@ -24,7 +24,7 @@
         </mat-tab>
         <mat-tab label="Evaluated students">
             <div class="card">
-                <div *ngFor="let student of students">
+                <div *ngFor="let student of students$ | async">
                     <mat-card class="example-card" *ngIf="student.evaluated">
                         <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
                         <mat-card-title>{{student.name}}</mat-card-title>

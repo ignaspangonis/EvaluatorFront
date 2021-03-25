@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-import { Mentor } from 'src/app/shared/mentor';
-import { MentorService } from 'src/app/services/mentor.service';
-import { Student } from 'src/app/shared/student';
-import { StudentService } from 'src/app/services/student.service';
-import {MatDialog} from '@angular/material/dialog';
 import {EvaluationCardComponent} from '../../components/evaluation-card/evaluation-card.component';
 import {EvaluationService} from '../../services/evaluation.service';
+import {MatDialog} from '@angular/material/dialog';
+import { Mentor } from 'src/app/shared/mentor';
+import { MentorService } from 'src/app/services/mentor.service';
 import {Observable} from 'rxjs';
+import { Student } from 'src/app/shared/student';
+import { StudentService } from 'src/app/services/student.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ import {Observable} from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   isEvaluationSaved: boolean;
-  students: Student[];
+  students$: Observable<Student[]>;
   mentor: Mentor;
   mentorStream;
   constructor(public dialog: MatDialog, private studentService: StudentService,  private mentorService: MentorService,
@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
         this.evaluationService.setIsEvaluationSaved(false);
       }, 6000);
     }
+    
 
   }
 
@@ -45,11 +46,7 @@ export class HomeComponent implements OnInit {
   }
 
   getMentorStudents() {
-    this.studentService.getMentorStudents().subscribe(
-      response => {
-        this.students = response;
-      }
-    );
+    this.students$ = this.studentService.getMentorStudents().pipe();
   }
 
   getMentor() {
