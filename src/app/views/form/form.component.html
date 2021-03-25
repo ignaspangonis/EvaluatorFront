@@ -1,7 +1,7 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-<!--  <hr>-->
-<!--  Value: {{ profileForm.value | json }}-->
-<!--  <hr>-->
+  <!--  <hr>-->
+  <!--  Value: {{ profileForm.value | json }}-->
+  <!--  <hr>-->
   <div class="container">
     <mat-card class="example-card" *ngIf="student$ | async as student">
       <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
@@ -82,6 +82,8 @@
       <textarea matInput formControlName="comment" ngModel maxlength="150"></textarea>
     </mat-form-field>
 
+    <mat-error *ngIf="errorMsg">Error: {{errorMsg}}</mat-error>
     <button mat-raised-button color="primary" type="submit">Submit</button>
+
   </div>
 </form>
