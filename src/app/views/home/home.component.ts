@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
               private evaluationService: EvaluationService) { }
 
   ngOnInit(): void {
-    this.getMentorStudents();
+    this.students$ = this.studentService.getMentorStudents().pipe();
     this.getMentor();
     this.isEvaluationSaved = this.evaluationService.getIsEvaluationSaved();
     if (this.isEvaluationSaved){
@@ -32,10 +32,7 @@ export class HomeComponent implements OnInit {
         this.evaluationService.setIsEvaluationSaved(false);
       }, 6000);
     }
-    
-
   }
-
 
   openDialog(student: Student) {
     this.dialog.open(EvaluationCardComponent, {
@@ -43,10 +40,6 @@ export class HomeComponent implements OnInit {
       width: '900px',
       height: '600px'
     });
-  }
-
-  getMentorStudents() {
-    this.students$ = this.studentService.getMentorStudents().pipe();
   }
 
   getMentor() {
