@@ -5,7 +5,10 @@
       <a [routerLink]="['/mentor/', mentorId, 'home']" >Home</a>
     </div>
 
-      <a class="exit" [routerLink]="['/']" >Exit</a>
+    <div>
+      <span class="mentorName">Signed in as: {{ (mentor$ | async).name }}</span>
+    </div>
+    <a class="exit" [routerLink]="['/']" >Exit</a>
 
   </mat-toolbar>
 </div>

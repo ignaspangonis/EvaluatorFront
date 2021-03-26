@@ -9,6 +9,7 @@ import {EvaluationCardComponent} from '../../components/evaluation-card/evaluati
 import {EvaluationService} from '../../services/evaluation.service';
 import {Observable} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
   mentorStream;
   mentorId: string;
   constructor(public dialog: MatDialog, private studentService: StudentService,  private mentorService: MentorService,
-              private evaluationService: EvaluationService, private route: ActivatedRoute) { }
+              private evaluationService: EvaluationService, private snackBar: MatSnackBar, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -34,10 +35,11 @@ export class HomeComponent implements OnInit {
     this.getMentor(this.mentorId);
     this.isEvaluationSaved = this.evaluationService.getIsEvaluationSaved();
     if (this.isEvaluationSaved){
-      setTimeout(() => {
-        this.isEvaluationSaved = false;
-        this.evaluationService.setIsEvaluationSaved(false);
-      }, 6000);
+      this.snackBar.open('Your evaluation has been saved', 'close', {
+        duration: 6000,
+      });
+      this.isEvaluationSaved = false;
+      this.evaluationService.setIsEvaluationSaved(false);
     }
 
   }
