@@ -21,6 +21,6 @@ export class NavbarComponent implements OnInit {
   }
 
   getMentor() {
-    this.mentor$ = this.mentorService.getMentor();
+    this.mentor$ = this.mentorService.getMentor(this.mentorId);
   }
 }
