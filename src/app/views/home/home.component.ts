@@ -32,8 +32,8 @@ export class HomeComponent implements OnInit {
       (params: ParamMap) => {
         this.mentorId = params.get('mentorId');
       });
+    this.students$ = this.studentService.getMentorStudents(this.mentorId);
 
-    this.getMentorStudents(this.mentorId);
     this.getMentor(this.mentorId);
     this.isEvaluationSaved = this.evaluationService.getIsEvaluationSaved();
     if (this.isEvaluationSaved){
@@ -51,14 +51,6 @@ export class HomeComponent implements OnInit {
       width: '900px',
       height: '600px'
     });
-  }
-
-  getMentorStudents(mentorId: string) {
-    this.studentService.getMentorStudents(mentorId).subscribe(
-      response => {
-        this.students = response;
-      }
-    );
   }
 
   getMentor(mentorId: string) {
