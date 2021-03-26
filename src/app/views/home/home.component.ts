@@ -8,6 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {EvaluationCardComponent} from '../../components/evaluation-card/evaluation-card.component';
 import {EvaluationService} from '../../services/evaluation.service';
 import {Observable} from 'rxjs';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -19,12 +20,18 @@ export class HomeComponent implements OnInit {
   students: Student[];
   mentor: Mentor;
   mentorStream;
+  mentorId: string;
   constructor(public dialog: MatDialog, private studentService: StudentService,  private mentorService: MentorService,
-              private evaluationService: EvaluationService) { }
+              private evaluationService: EvaluationService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getMentorStudents();
-    this.getMentor();
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.mentorId = params.get('mentorId');
+      });
+
+    this.getMentorStudents(this.mentorId);
+    this.getMentor(this.mentorId);
     this.isEvaluationSaved = this.evaluationService.getIsEvaluationSaved();
     if (this.isEvaluationSaved){
       setTimeout(() => {
@@ -44,16 +51,16 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getMentorStudents() {
-    this.studentService.getMentorStudents().subscribe(
+  getMentorStudents(mentorId: string) {
+    this.studentService.getMentorStudents(mentorId).subscribe(
       response => {
         this.students = response;
       }
     );
   }
 
-  getMentor() {
-    this.mentorService.getMentor().subscribe(
+  getMentor(mentorId: string) {
+    this.mentorService.getMentor(mentorId).subscribe(
       response => {
         this.mentor = response;
         this.mentorStream = this.mentor.stream;

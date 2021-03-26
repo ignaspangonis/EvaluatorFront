@@ -8,11 +8,14 @@ import { Observable } from 'rxjs';
 })
 export class MentorService {
 
-  private url = 'https://my-evaluation-platform.herokuapp.com/api/mentor/6';
+  private url = 'https://my-evaluation-platform.herokuapp.com/api/mentor';
 
   constructor(private httpClient: HttpClient) { }
 
-  getMentor(): Observable<Mentor> {
-    return this.httpClient.get<Mentor>(this.url);
+  getMentor(id: string): Observable<Mentor> {
+    return this.httpClient.get<Mentor>(this.url + '/' + id);
+  }
+  getMentors(): Observable<Mentor[]>{
+    return this.httpClient.get<Mentor[]>(this.url);
   }
 }

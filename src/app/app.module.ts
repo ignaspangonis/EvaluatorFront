@@ -8,8 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { EvaluationCardComponent } from './components/evaluation-card/evaluation-card.component';
+import { IdentificationComponent } from './views/identification/identification.component';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { EvaluationCardComponent } from './components/evaluation-card/evaluation
     HomeComponent,
     FormComponent,
     NavbarComponent,
-    EvaluationCardComponent
+    EvaluationCardComponent,
+    IdentificationComponent,
+
   ],
   entryComponents: [EvaluationCardComponent],
   imports: [
@@ -26,7 +30,8 @@ import { EvaluationCardComponent } from './components/evaluation-card/evaluation
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

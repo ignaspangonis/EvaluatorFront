@@ -2,7 +2,10 @@
   <mat-toolbar color="primary" class="navbar">
   <mat-icon routerLink="/home" aria-hidden="false" aria-label="Example home icon" id="home-icon">home</mat-icon>
     <div>
-      <a routerLink="/" >Home</a>
+      <a [routerLink]="['/mentor/', mentorId, 'home']" >Home</a>
     </div>
+
+      <a class="exit" [routerLink]="['/']" >Exit</a>
+
   </mat-toolbar>
 </div>
