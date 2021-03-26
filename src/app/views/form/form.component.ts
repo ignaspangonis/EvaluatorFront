@@ -20,6 +20,7 @@ import {EvaluationService} from '../../services/evaluation.service';
 export class FormComponent implements OnInit {
   profileForm: FormGroup;
   student$: Observable<Student>;
+  mentorId: string;
   id: string;
   isEvaluated: string;
   evaluation: Evaluation;
@@ -37,6 +38,7 @@ export class FormComponent implements OnInit {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.id = params.get('id');
+        this.mentorId = params.get('mentorId');
         this.student$ = this.studentService.getStudentById(this.id);
       });
 
@@ -45,7 +47,7 @@ export class FormComponent implements OnInit {
     });
 
     this.profileForm = this.fb.group({
-      mentorID: [6],
+      mentorID: [this.mentorId],
       studentId: [this.id, [Validators.required]],
       participation: ['', [Validators.required]],
       techSkills: ['', [Validators.required]],
@@ -55,7 +57,7 @@ export class FormComponent implements OnInit {
     });
 
     if (this.isEvaluated === 'true') {
-      this.studentService.getEvaluation(this.id).subscribe((evaluation) => {
+      this.studentService.getEvaluation(this.id, this.mentorId).subscribe((evaluation) => {
         this.evaluation = evaluation;
         this.profileForm.patchValue({
           mentorID: this.evaluation.mentorID,
@@ -118,15 +120,14 @@ export class FormComponent implements OnInit {
     this.profileForm.value.extraMile = parseInt(this.profileForm.value.extraMile, 10);
     if (this.isEvaluated === 'false') {
       this.studentService.postEvaluation(this.profileForm.value, this.studentId.value).subscribe(() => {
-        this.reset();
+        this.router.navigate(['mentor/', this.mentorId, 'home']);
       });
     } else if (this.isEvaluated === 'true') {
       this.studentService.putEvaluation(this.profileForm.value, this.evaluationId).subscribe(() => {
-        this.reset();
+        this.router.navigate(['mentor/', this.mentorId, 'home']);
       });
     }
     this.evaluationService.setIsEvaluationSaved(true);
-    this.router.navigate(['mentor/6/home']);
   }
 
   private scrollToError() {

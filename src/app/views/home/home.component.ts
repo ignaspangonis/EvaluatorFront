@@ -8,6 +8,9 @@ import {MentorService} from 'src/app/services/mentor.service';
 import {Observable} from 'rxjs';
 import {Student} from 'src/app/shared/student';
 import {StudentService} from 'src/app/services/student.service';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-home',
@@ -19,20 +22,26 @@ export class HomeComponent implements OnInit {
   students$: Observable<Student[]>;
   mentor: Mentor;
   mentorStream;
-
-  constructor(public dialog: MatDialog, private studentService: StudentService, private mentorService: MentorService,
-              private evaluationService: EvaluationService) {
-  }
+  mentorId: string;
+  
+  constructor(public dialog: MatDialog, private studentService: StudentService,  private mentorService: MentorService,
+              private evaluationService: EvaluationService, private snackBar: MatSnackBar, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.students$ = this.studentService.getMentorStudents();
-    this.getMentor();
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.mentorId = params.get('mentorId');
+      });
+
+    this.getMentorStudents(this.mentorId);
+    this.getMentor(this.mentorId);
     this.isEvaluationSaved = this.evaluationService.getIsEvaluationSaved();
-    if (this.isEvaluationSaved) {
-      setTimeout(() => {
-        this.isEvaluationSaved = false;
-        this.evaluationService.setIsEvaluationSaved(false);
-      }, 6000);
+    if (this.isEvaluationSaved){
+      this.snackBar.open('Your evaluation has been saved', 'close', {
+        duration: 6000,
+      });
+      this.isEvaluationSaved = false;
+      this.evaluationService.setIsEvaluationSaved(false);
     }
   }
 
@@ -44,8 +53,16 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getMentor() {
-    this.mentorService.getMentor().subscribe(
+  getMentorStudents(mentorId: string) {
+    this.studentService.getMentorStudents(mentorId).subscribe(
+      response => {
+        this.students = response;
+      }
+    );
+  }
+
+  getMentor(mentorId: string) {
+    this.mentorService.getMentor(mentorId).subscribe(
       response => {
         this.mentor = response;
         this.mentorStream = this.mentor.stream;

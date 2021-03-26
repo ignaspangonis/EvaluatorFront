@@ -1,19 +1,29 @@
 .navbar {
-  justify-content: left;
+  display: flex;
+  justify-content: space-between;
+  //justify-content: left;
+
+  div {
+    display: flex;
+    a {
+      padding-left: 0;
+    }
+  }
 }
-.navbar a {
-  padding-right: 2rem;
-  text-decoration: none;
-  color: antiquewhite;
-}
-.navbar a:hover {
-  color: green;
-}
+
 #home-icon {
   font-size: 36px;
   padding-right: 20px;
   padding-bottom: 10px;
 }
-#home-icon:hover {
-  color: green;
+
+.navbar .exit {
+  margin-left: auto;
+  padding-right: 0;
 }
+
+.mentorName {
+  color: antiquewhite;
+  margin-right: 20px;
+}
+

@@ -1,11 +1,9 @@
+<app-navbar [mentorId]="mentorId"></app-navbar>
 <div class="container">
     <p>
         <mat-toolbar>
           <span>You are evaluating {{mentorStream}} students</span>
         </mat-toolbar>
-      <mat-toolbar class = "savedEvaluationText" *ngIf="isEvaluationSaved">
-      <span>Your evaluation has been saved!</span>
-      </mat-toolbar>
     </p>
     <mat-tab-group mat-align-tabs="center" *ngIf="students$ | async as students">
         <mat-tab label="Not evaluated students">
