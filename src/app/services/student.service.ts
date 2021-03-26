@@ -61,10 +61,10 @@ export class StudentService {
     let errorMsg: string;
     switch (error.status) {
       case 409:
-        errorMsg = 'This student is already evaluated! Please go back to Home and choose the student again.';
+        errorMsg = 'This student is already evaluated! Please go back to Home page and choose the student again.';
         break;
       case 404:
-        errorMsg = 'Evaluation form not found! Please go back to Home and choose the student again.';
+        errorMsg = 'Evaluation form not found! Please go back to Home page and choose the student again.';
         break;
       default:
         errorMsg = 'Server error';
