@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.students$ = this.studentService.getMentorStudents().pipe();
+    this.students$ = this.studentService.getMentorStudents();
     this.getMentor();
     this.isEvaluationSaved = this.evaluationService.getIsEvaluationSaved();
     if (this.isEvaluationSaved) {
