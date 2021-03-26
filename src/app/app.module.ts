@@ -26,7 +26,7 @@ import { EvaluationCardComponent } from './components/evaluation-card/evaluation
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

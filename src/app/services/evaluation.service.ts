@@ -17,6 +17,6 @@ export class EvaluationService {
   }
 
   setIsEvaluationSaved(isEvaluationSaved: boolean): void{
-    this.isEvaluationSaved = true;
+    this.isEvaluationSaved = isEvaluationSaved;
   }
 }

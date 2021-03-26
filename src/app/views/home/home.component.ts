@@ -8,6 +8,9 @@ import {MatDialog} from '@angular/material/dialog';
 import {EvaluationCardComponent} from '../../components/evaluation-card/evaluation-card.component';
 import {EvaluationService} from '../../services/evaluation.service';
 import {Observable} from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
+
 
 @Component({
   selector: 'app-home',
@@ -20,17 +23,18 @@ export class HomeComponent implements OnInit {
   mentor: Mentor;
   mentorStream;
   constructor(public dialog: MatDialog, private studentService: StudentService,  private mentorService: MentorService,
-              private evaluationService: EvaluationService) { }
+              private evaluationService: EvaluationService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getMentorStudents();
     this.getMentor();
     this.isEvaluationSaved = this.evaluationService.getIsEvaluationSaved();
     if (this.isEvaluationSaved){
-      setTimeout(() => {
-        this.isEvaluationSaved = false;
-        this.evaluationService.setIsEvaluationSaved(false);
-      }, 6000);
+      this.snackBar.open('Your evaluation has been saved', 'close', {
+        duration: 6000,
+      });
+      this.isEvaluationSaved = false;
+      this.evaluationService.setIsEvaluationSaved(false);
     }
 
   }
