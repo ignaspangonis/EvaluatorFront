@@ -9,7 +9,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Evaluation} from '../../shared/evaluation';
 
 import {map} from 'rxjs/operators';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {EvaluationService} from '../../services/evaluation.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class FormComponent implements OnInit {
   student$: Observable<Student>;
   mentorId: string;
   id: string;
-  isEvaluated: string;
+  isEvaluated: boolean;
   evaluation: Evaluation;
   evaluationId: number;
   maxCharacters = 150;
@@ -30,9 +30,11 @@ export class FormComponent implements OnInit {
   isValid = true;
   @Input()
   maxlength: string | number;
+  errorMsg: string;
 
   constructor(private route: ActivatedRoute, private studentService: StudentService, private fb: FormBuilder,
-              private router: Router, private evaluationService: EvaluationService) { }
+              private router: Router, private evaluationService: EvaluationService) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -43,7 +45,7 @@ export class FormComponent implements OnInit {
       });
 
     this.route.queryParams.subscribe(params => {
-      this.isEvaluated = params['isEvaluated'];
+      this.isEvaluated = params['isEvaluated'] === 'true';
     });
 
     this.profileForm = this.fb.group({
@@ -56,8 +58,9 @@ export class FormComponent implements OnInit {
       comment: ['', [Validators.maxLength(this.maxCharacters)]]
     });
 
-    if (this.isEvaluated === 'true') {
+    if (this.isEvaluated === true) {
       this.studentService.getEvaluation(this.id, this.mentorId).subscribe((evaluation) => {
+
         this.evaluation = evaluation;
         this.profileForm.patchValue({
           mentorID: this.evaluation.mentorID,
@@ -69,7 +72,7 @@ export class FormComponent implements OnInit {
           comment: this.evaluation.comment,
         });
         this.evaluationId = this.evaluation.id;
-      });
+      }, error => this.errorMsg = error);
     }
     this.charsRemaining$ = concat(of(''), this.comment.valueChanges).pipe(
       map((content) => {
@@ -118,14 +121,15 @@ export class FormComponent implements OnInit {
     this.profileForm.value.techSkills = parseInt(this.profileForm.value.techSkills, 10);
     this.profileForm.value.learningPace = parseInt(this.profileForm.value.learningPace, 10);
     this.profileForm.value.extraMile = parseInt(this.profileForm.value.extraMile, 10);
-    if (this.isEvaluated === 'false') {
-      this.studentService.postEvaluation(this.profileForm.value, this.studentId.value).subscribe(() => {
-        this.router.navigate(['mentor/', this.mentorId, 'home']);
-      });
-    } else if (this.isEvaluated === 'true') {
+
+    if (this.isEvaluated) {
       this.studentService.putEvaluation(this.profileForm.value, this.evaluationId).subscribe(() => {
         this.router.navigate(['mentor/', this.mentorId, 'home']);
-      });
+      }, error => this.errorMsg = error);
+    } else {
+      this.studentService.postEvaluation(this.profileForm.value).subscribe(() => {
+        this.router.navigate(['mentor/', this.mentorId, 'home']);
+      }, error => this.errorMsg = error);
     }
     this.evaluationService.setIsEvaluationSaved(true);
   }
@@ -134,6 +138,6 @@ export class FormComponent implements OnInit {
     const firstInvalidControl = document.querySelector(
       '.ng-invalid[formControlName]'
     );
-    firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    firstInvalidControl.scrollIntoView({behavior: 'smooth', block: 'center'});
   }
 }

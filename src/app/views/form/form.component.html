@@ -103,6 +103,8 @@
       ></textarea>
     </mat-form-field>
 
+    <mat-error *ngIf="errorMsg">Error: {{errorMsg}}</mat-error>
     <button mat-raised-button color="primary" type="submit">Submit</button>
+
   </div>
 </form>

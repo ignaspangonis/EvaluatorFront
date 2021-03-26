@@ -1,6 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Mentor} from '../shared/mentor';
 
 @Injectable({
   providedIn: 'root'
