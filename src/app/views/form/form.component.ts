@@ -120,15 +120,14 @@ export class FormComponent implements OnInit {
     this.profileForm.value.extraMile = parseInt(this.profileForm.value.extraMile, 10);
     if (this.isEvaluated === 'false') {
       this.studentService.postEvaluation(this.profileForm.value, this.studentId.value).subscribe(() => {
-        this.reset();
+        this.router.navigate(['mentor/', this.mentorId, 'home']);
       });
     } else if (this.isEvaluated === 'true') {
       this.studentService.putEvaluation(this.profileForm.value, this.evaluationId).subscribe(() => {
-        this.reset();
+        this.router.navigate(['mentor/', this.mentorId, 'home']);
       });
     }
     this.evaluationService.setIsEvaluationSaved(true);
-    this.router.navigate(['mentor/', this.mentorId, 'home']);
   }
 
   private scrollToError() {
