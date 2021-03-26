@@ -10,14 +10,15 @@ import {catchError} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class StudentService {
-  private url = 'https://my-evaluation-platform.herokuapp.com/api/mentor/6';
+  private url = 'https://my-evaluation-platform.herokuapp.com/api/mentor/';
 
   constructor(private httpClient: HttpClient) {
   }
 
-  getStudents(): Observable<Student[]> {
-    return this.httpClient
-      .get<Student[]>(this.url + `/student`);
+
+  getStudents(mentorId: string): Observable<Student[]> {
+    return this.httpClient.get<Student[]>(this.url + mentorId + `/student`);
+
   }
 
   getStudentById(id: string): Observable<Student> {
@@ -37,20 +38,24 @@ export class StudentService {
   }
 
   // These methods will not used yet:
-  getEvaluation(studentId: string): Observable<Evaluation | undefined> {
+
+  getEvaluation(studentId: string, mentorId: string): Observable<Evaluation | undefined> {
     return this.httpClient
-      .get<Evaluation>(this.url + `/student/${studentId}/evaluation`)
+      .get<Evaluation>(this.url  + mentorId + `/student/${studentId}/evaluation`)
       .pipe(
         catchError(this.handleError)
       );
+
+  getEvaluation(studentId: string, mentorId: string): Observable<Evaluation | undefined> {
+    return this.httpClient;
   }
 
   putEvaluation(evaluation: Evaluation, id: number): Observable<Evaluation> {
     return this.httpClient.put<Evaluation>(`https://my-evaluation-platform.herokuapp.com/api/evaluation/${id}`, evaluation);
   }
 
-  getMentorStudents(): Observable<Student[]> {
-    return this.httpClient.get<Student[]>(this.url + `/student`);
+  getMentorStudents(mentorId: string): Observable<Student[]> {
+    return this.httpClient.get<Student[]>(this.url + mentorId + `/student`);
   }
 
   getJointEvaluation(studentId: string): Observable<EvaluationCard | undefined> {

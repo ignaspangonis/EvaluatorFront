@@ -20,6 +20,7 @@ import {EvaluationService} from '../../services/evaluation.service';
 export class FormComponent implements OnInit {
   profileForm: FormGroup;
   student$: Observable<Student>;
+  mentorId: string;
   id: string;
   isEvaluated: boolean;
   evaluation: Evaluation;
@@ -39,6 +40,7 @@ export class FormComponent implements OnInit {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.id = params.get('id');
+        this.mentorId = params.get('mentorId');
         this.student$ = this.studentService.getStudentById(this.id);
       });
 
@@ -47,7 +49,7 @@ export class FormComponent implements OnInit {
     });
 
     this.profileForm = this.fb.group({
-      mentorID: [6],
+      mentorID: [this.mentorId],
       studentId: [this.id, [Validators.required]],
       participation: ['', [Validators.required]],
       techSkills: ['', [Validators.required]],
@@ -55,8 +57,10 @@ export class FormComponent implements OnInit {
       extraMile: ['', [Validators.required]],
       comment: ['', [Validators.maxLength(this.maxCharacters)]]
     });
+
     if (this.isEvaluated === true) {
-      this.studentService.getEvaluation(this.id).subscribe((evaluation) => {
+      this.studentService.getEvaluation(this.id, this.mentorId).subscribe((evaluation) => {
+
         this.evaluation = evaluation;
         this.profileForm.patchValue({
           mentorID: this.evaluation.mentorID,
@@ -117,19 +121,18 @@ export class FormComponent implements OnInit {
     this.profileForm.value.techSkills = parseInt(this.profileForm.value.techSkills, 10);
     this.profileForm.value.learningPace = parseInt(this.profileForm.value.learningPace, 10);
     this.profileForm.value.extraMile = parseInt(this.profileForm.value.extraMile, 10);
+
     if (this.isEvaluated) {
-      console.log('if (this.isEvaluated) called');
+
       this.studentService.putEvaluation(this.profileForm.value, this.evaluationId).subscribe(() => {
-        this.reset();
+        this.router.navigate(['mentor/', this.mentorId, 'home']);
       }, error => this.errorMsg = error);
     } else {
-      console.log(' (!this.isEvaluated)  else called');
-      this.studentService.postEvaluation(this.profileForm.value)
-        .subscribe(() => this.reset(),
-          error => this.errorMsg = error);
+      this.studentService.postEvaluation(this.profileForm.value, this.studentId.value).subscribe(() => {
+        this.router.navigate(['mentor/', this.mentorId, 'home']);
+      }, error => this.errorMsg = error);
     }
     this.evaluationService.setIsEvaluationSaved(true);
-    this.router.navigate(['mentor/6/home']);
   }
 
   private scrollToError() {

@@ -1,17 +1,23 @@
+<app-navbar [mentorId]="mentorId"></app-navbar>
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <!--  <hr>-->
   <!--  Value: {{ profileForm.value | json }}-->
   <!--  <hr>-->
   <div class="container">
     <mat-card class="example-card" *ngIf="student$ | async as student">
-      <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
+      <img mat-card-image src="{{ student.image }}" alt="{{ student.name }}" />
       <mat-card-header>
-        <mat-card-title>{{student.name}}</mat-card-title>
+        <mat-card-title>{{ student.name }}</mat-card-title>
       </mat-card-header>
     </mat-card>
 
-    <label for="participation" id="example-radio-group-label">Participation</label>
-    <p>Please evaluate activity of the student during the classes (homework, tasks in class).</p>
+    <label for="participation" class="example-radio-group-label"
+      >Participation</label
+    >
+    <p>
+      Please evaluate activity of the student during the classes (homework,
+      tasks in class).
+    </p>
     <mat-error *ngIf="!isValid && participation.hasError('required')">
       Please choose one of the options.
     </mat-error>
@@ -26,8 +32,13 @@
       <mat-radio-button value="3">Very active</mat-radio-button>
     </mat-radio-group>
 
-    <label for="techSkills" id="example-radio-group-label">Technical skills</label>
-    <p>Please evaluate the technical skills that the student has after the classes.</p>
+    <label for="techSkills" class="example-radio-group-label"
+      >Technical skills</label
+    >
+    <p>
+      Please evaluate the technical skills that the student has after the
+      classes.
+    </p>
     <mat-error *ngIf="!isValid && techSkills.hasError('required')">
       Please choose one of the options.
     </mat-error>
@@ -42,7 +53,9 @@
       <mat-radio-button value="3">Advanced</mat-radio-button>
     </mat-radio-group>
 
-    <label for="learningPace" id="example-radio-group-label">Learning pace</label>
+    <label for="learningPace" class="example-radio-group-label"
+      >Learning pace</label
+    >
     <p>Please evaluate the learning pace of the student.</p>
     <mat-error *ngIf="!isValid && learningPace.hasError('required')">
       Please choose one of the options.
@@ -58,8 +71,11 @@
       <mat-radio-button value="3">Fast</mat-radio-button>
     </mat-radio-group>
 
-    <label for="extraMile" id="example-radio-group-label">Extra mile</label>
-    <p>Please evaluate the degree to which the student was proactive, took more responsibilities than were required.</p>
+    <label for="extraMile" class="example-radio-group-label">Extra mile</label>
+    <p>
+      Please evaluate the degree to which the student was proactive, took more
+      responsibilities than were required.
+    </p>
     <mat-error *ngIf="!isValid && extraMile.hasError('required')">
       Please choose one of the options.
     </mat-error>
@@ -74,12 +90,17 @@
       <mat-radio-button value="3">A lot</mat-radio-button>
     </mat-radio-group>
 
-    <label id="example-radio-group-label">Comments (optional)</label>
+    <label class="example-radio-group-label">Comments (optional)</label>
     <div>
       {{ charsRemaining$ | async }}/{{ maxCharacters }} characters left.
     </div>
     <mat-form-field appearance="fill">
-      <textarea matInput formControlName="comment" ngModel maxlength="150"></textarea>
+      <textarea
+        matInput
+        formControlName="comment"
+        ngModel
+        maxlength="150"
+      ></textarea>
     </mat-form-field>
 
     <mat-error *ngIf="errorMsg">Error: {{errorMsg}}</mat-error>
