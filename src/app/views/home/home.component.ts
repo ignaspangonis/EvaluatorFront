@@ -23,9 +23,10 @@ export class HomeComponent implements OnInit {
   mentor: Mentor;
   mentorStream;
   mentorId: string;
-  
-  constructor(public dialog: MatDialog, private studentService: StudentService,  private mentorService: MentorService,
-              private evaluationService: EvaluationService, private snackBar: MatSnackBar, private route: ActivatedRoute) { }
+
+  constructor(public dialog: MatDialog, private studentService: StudentService, private mentorService: MentorService,
+              private evaluationService: EvaluationService, private snackBar: MatSnackBar, private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -36,7 +37,7 @@ export class HomeComponent implements OnInit {
 
     this.getMentor(this.mentorId);
     this.isEvaluationSaved = this.evaluationService.getIsEvaluationSaved();
-    if (this.isEvaluationSaved){
+    if (this.isEvaluationSaved) {
       this.snackBar.open('Your evaluation has been saved', 'close', {
         duration: 6000,
       });
