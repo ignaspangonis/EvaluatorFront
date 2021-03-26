@@ -5,7 +5,7 @@
           <span>You are evaluating {{mentorStream}} students</span>
         </mat-toolbar>
     </p>
-    <mat-tab-group mat-align-tabs="center">
+    <mat-tab-group mat-align-tabs="center" *ngIf="students$ | async as students">
         <mat-tab label="Not evaluated students">
             <div class="card">
                 <div *ngFor="let student of students">
