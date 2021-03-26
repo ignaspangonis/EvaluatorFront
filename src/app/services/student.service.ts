@@ -16,11 +16,16 @@ export class StudentService {
   }
 
   getStudents(): Observable<Student[]> {
-    return this.httpClient.get<Student[]>(this.url + `/student`);
+    return this.httpClient
+      .get<Student[]>(this.url + `/student`);
   }
 
   getStudentById(id: string): Observable<Student> {
-    return this.httpClient.get<Student>(`https://my-evaluation-platform.herokuapp.com/api/student/${id}`);
+    return this.httpClient
+      .get<Student>(`https://my-evaluation-platform.herokuapp.com/api/student/${id}`)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   postEvaluation(evaluation: Evaluation): Observable<Evaluation> {
@@ -33,19 +38,15 @@ export class StudentService {
 
   // These methods will not used yet:
   getEvaluation(studentId: string): Observable<Evaluation | undefined> {
-    return this.httpClient.get<Evaluation>(this.url + `/student/${studentId}/evaluation`);
+    return this.httpClient
+      .get<Evaluation>(this.url + `/student/${studentId}/evaluation`)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   putEvaluation(evaluation: Evaluation, id: number): Observable<Evaluation> {
     return this.httpClient.put<Evaluation>(`https://my-evaluation-platform.herokuapp.com/api/evaluation/${id}`, evaluation);
-  }
-
-  getEvaluatedStudents(): Observable<Student[]> {
-    return this.httpClient.get<Student[]>(this.url + `/student?isEvaluated=1`);
-  }
-
-  getNotEvaluatedStudents(): Observable<Student[]> {
-    return this.httpClient.get<Student[]>(this.url + `/student?isEvaluated=0`);
   }
 
   getMentorStudents(): Observable<Student[]> {
@@ -60,7 +61,10 @@ export class StudentService {
     let errorMsg: string;
     switch (error.status) {
       case 409:
-        errorMsg = 'This student is already evaluated! Please go to Home and choose the student again.';
+        errorMsg = 'This student is already evaluated! Please go back to Home and choose the student again.';
+        break;
+      case 404:
+        errorMsg = 'Evaluation form not found! Please go back to Home and choose the student again.';
         break;
       default:
         errorMsg = 'Server error';

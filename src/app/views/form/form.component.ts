@@ -68,7 +68,7 @@ export class FormComponent implements OnInit {
           comment: this.evaluation.comment,
         });
         this.evaluationId = this.evaluation.id;
-      });
+      }, error => this.errorMsg = error);
     }
     this.charsRemaining$ = concat(of(''), this.comment.valueChanges).pipe(
       map((content) => {
@@ -118,12 +118,10 @@ export class FormComponent implements OnInit {
     this.profileForm.value.learningPace = parseInt(this.profileForm.value.learningPace, 10);
     this.profileForm.value.extraMile = parseInt(this.profileForm.value.extraMile, 10);
     if (this.isEvaluated) {
-      if (this.isEvaluated) {
-        console.log('if (this.isEvaluated) called');
-        this.studentService.putEvaluation(this.profileForm.value, this.evaluationId).subscribe(() => {
-          this.reset();
-        }, error => this.errorMsg = error);
-      }
+      console.log('if (this.isEvaluated) called');
+      this.studentService.putEvaluation(this.profileForm.value, this.evaluationId).subscribe(() => {
+        this.reset();
+      }, error => this.errorMsg = error);
     } else {
       console.log(' (!this.isEvaluated)  else called');
       this.studentService.postEvaluation(this.profileForm.value)
@@ -131,7 +129,7 @@ export class FormComponent implements OnInit {
           error => this.errorMsg = error);
     }
     this.evaluationService.setIsEvaluationSaved(true);
-    // this.router.navigate(['mentor/6/home']);
+    this.router.navigate(['mentor/6/home']);
   }
 
   private scrollToError() {
