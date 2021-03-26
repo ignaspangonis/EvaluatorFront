@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MentorService} from '../../services/mentor.service';
 import {Mentor} from '../../shared/mentor';
 import {MatDialog} from '@angular/material/dialog';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -9,8 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  mentor: Mentor;
-  mentorName: string;
+  mentor$: Observable<Mentor>;
   constructor(private mentorService: MentorService) {  }
 
   ngOnInit(): void {
@@ -18,11 +18,6 @@ export class NavbarComponent implements OnInit {
   }
 
   getMentor() {
-    this.mentorService.getMentor().subscribe(
-      response => {
-        this.mentor = response;
-        this.mentorName = this.mentor.name;
-      }
-    );
+    this.mentor$ = this.mentorService.getMentor();
   }
 }

@@ -5,7 +5,7 @@
       <a routerLink="/" >Home</a>
     </div>
     <div>
-      <span class="mentorName">Signed in as: {{mentorName}}</span>
+      <span class="mentorName">Signed in as: {{ (mentor$ | async).name }}</span>
     </div>
   </mat-toolbar>
 </div>
