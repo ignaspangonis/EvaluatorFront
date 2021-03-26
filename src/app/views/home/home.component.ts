@@ -1,15 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-import {Mentor} from 'src/app/shared/mentor';
-import {MentorService} from 'src/app/services/mentor.service';
-import {Student} from 'src/app/shared/student';
-import {StudentService} from 'src/app/services/student.service';
-import {MatDialog} from '@angular/material/dialog';
 import {EvaluationCardComponent} from '../../components/evaluation-card/evaluation-card.component';
 import {EvaluationService} from '../../services/evaluation.service';
+import {MatDialog} from '@angular/material/dialog';
+import {Mentor} from 'src/app/shared/mentor';
+import {MentorService} from 'src/app/services/mentor.service';
 import {Observable} from 'rxjs';
+import {Student} from 'src/app/shared/student';
+import {StudentService} from 'src/app/services/student.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class HomeComponent implements OnInit {
   isEvaluationSaved: boolean;
-  students: Student[];
+  students$: Observable<Student[]>;
   mentor: Mentor;
   mentorStream;
   mentorId: string;
@@ -31,12 +32,12 @@ export class HomeComponent implements OnInit {
       (params: ParamMap) => {
         this.mentorId = params.get('mentorId');
       });
+    this.students$ = this.studentService.getMentorStudents(this.mentorId);
 
-    this.getMentorStudents(this.mentorId);
     this.getMentor(this.mentorId);
     this.isEvaluationSaved = this.evaluationService.getIsEvaluationSaved();
 
-    if (this.isEvaluationSaved){
+    if (this.isEvaluationSaved) {
       this.snackBar.open('Your evaluation has been saved', 'close', {
         duration: 6000,
       });
@@ -45,21 +46,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
-
   openDialog(student: Student) {
     this.dialog.open(EvaluationCardComponent, {
       data: {stud: student},
       width: '900px',
       height: '600px'
     });
-  }
-
-  getMentorStudents(mentorId: string) {
-    this.studentService.getMentorStudents(mentorId).subscribe(
-      response => {
-        this.students = response;
-      }
-    );
   }
 
   getMentor(mentorId: string) {
