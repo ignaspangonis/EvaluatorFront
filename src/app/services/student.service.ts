@@ -41,13 +41,10 @@ export class StudentService {
 
   getEvaluation(studentId: string, mentorId: string): Observable<Evaluation | undefined> {
     return this.httpClient
-      .get<Evaluation>(this.url  + mentorId + `/student/${studentId}/evaluation`)
+      .get<Evaluation>(this.url + mentorId + `/student/${studentId}/evaluation`)
       .pipe(
         catchError(this.handleError)
       );
-
-  getEvaluation(studentId: string, mentorId: string): Observable<Evaluation | undefined> {
-    return this.httpClient;
   }
 
   putEvaluation(evaluation: Evaluation, id: number): Observable<Evaluation> {

@@ -123,12 +123,11 @@ export class FormComponent implements OnInit {
     this.profileForm.value.extraMile = parseInt(this.profileForm.value.extraMile, 10);
 
     if (this.isEvaluated) {
-
       this.studentService.putEvaluation(this.profileForm.value, this.evaluationId).subscribe(() => {
         this.router.navigate(['mentor/', this.mentorId, 'home']);
       }, error => this.errorMsg = error);
     } else {
-      this.studentService.postEvaluation(this.profileForm.value, this.studentId.value).subscribe(() => {
+      this.studentService.postEvaluation(this.profileForm.value).subscribe(() => {
         this.router.navigate(['mentor/', this.mentorId, 'home']);
       }, error => this.errorMsg = error);
     }

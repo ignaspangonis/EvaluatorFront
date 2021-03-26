@@ -42,9 +42,7 @@ export class HomeComponent implements OnInit {
       });
       this.isEvaluationSaved = false;
       this.evaluationService.setIsEvaluationSaved(false);
-
     }
-
   }
 
 
