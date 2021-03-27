@@ -1,12 +1,11 @@
 <app-navbar [mentorId]="mentorId"></app-navbar>
 <div class="container">
-    <p>
-        <mat-toolbar>
-          <span>You are evaluating {{mentorStream}} students</span>
-        </mat-toolbar>
-    </p>
+    <mat-toolbar>
+      <span>You are evaluating {{mentorStream}} students</span>
+    </mat-toolbar>
+
     <mat-tab-group mat-align-tabs="center" *ngIf="students$ | async as students">
-        <mat-tab label="Not evaluated students">
+        <mat-tab label="Unevaluated students">
             <div class="card">
                 <div *ngFor="let student of students">
                     <mat-card class="example-card" *ngIf="!student.evaluated">
