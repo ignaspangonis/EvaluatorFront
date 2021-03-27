@@ -1,26 +1,43 @@
 .navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  * {
+    // font-size: 14px;
+  }
   //justify-content: left;
 
   div {
+    margin: 0 15%;
     display: flex;
-    a {
+    #home {
       padding-left: 0;
+      text-decoration: none;
+      color: antiquewhite;
+    }
+    #home:hover {
+      color: #ffd740;
+    }
+    #exit {
+      margin: auto 20px;
+    }
+    #home-icon {
+      font-size: 36px;
+      padding-right: 20px;
+      padding-bottom: 10px;
+      margin-right: 20px;
+    }
+    #home-icon:hover {
+      color: #ffd740;
+      cursor: default;
+    }
+    #home-icon:active, #home-icon:focus {
+      outline: none;
     }
   }
 }
 
-#home-icon {
-  font-size: 36px;
-  padding-right: 20px;
-  padding-bottom: 10px;
-}
 
-.navbar .exit {
-  margin-left: auto;
-  padding-right: 0;
-}
 
 .mentorName {
   color: antiquewhite;
