@@ -7,21 +7,20 @@
 <img src="{{data.stud.image}}" alt="{{data.stud.name}}">
 <div mat-dialog-content>
   <h2>Streams</h2>
-  <apx-chart
-    [series]="chartOptions.series"
-    [chart]="chartOptions.chart"
-    [dataLabels]="chartOptions.dataLabels"
-    [plotOptions]="chartOptions.plotOptions"
-    [yaxis]="chartOptions.yaxis"
-    [legend]="chartOptions.legend"
-    [fill]="chartOptions.fill"
-    [stroke]="chartOptions.stroke"
-    [tooltip]="chartOptions.tooltip"
-    [xaxis]="chartOptions.xaxis"
-    *ngIf="card.feEvaluationDTO != null ||
-           card.beEvaluationDTO != null ||
-           card.qaEvaluationDTO != null"
-  ></apx-chart>
+  <div *ngIf="card != null">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [dataLabels]="chartOptions.dataLabels"
+      [plotOptions]="chartOptions.plotOptions"
+      [yaxis]="chartOptions.yaxis"
+      [legend]="chartOptions.legend"
+      [fill]="chartOptions.fill"
+      [stroke]="chartOptions.stroke"
+      [tooltip]="chartOptions.tooltip"
+      [xaxis]="chartOptions.xaxis"
+    ></apx-chart>
+  </div>
   <div class="stream-section" *ngIf="card">
     <div class="stream">
       <h3>Frontend</h3>
@@ -61,4 +60,6 @@
     </div>
   </div>
 </div>
-
+<!--<div>-->
+<!--  Card: {{ card | json }}-->
+<!--</div>-->

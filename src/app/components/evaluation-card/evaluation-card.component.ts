@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {StudentService} from '../../services/student.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {EvaluationCard} from '../../shared/evaluation-card';
@@ -16,7 +16,6 @@ import {
   ApexFill,
   ApexTooltip
 } from 'ng-apexcharts';
-import {Observable} from 'rxjs';
 import {take} from 'rxjs/operators';
 
 export type ChartOptions = {
@@ -53,38 +52,37 @@ export class EvaluationCardComponent implements OnInit {
       .pipe(take(1))
       .toPromise()
       .then(data => data);
-    // @ts-ignore
     this.chartOptions = {
       series: [
         {
           name: 'Participation',
-          data: [this.card.feEvaluationDTO?.participation,
-            this.card.beEvaluationDTO?.participation,
-            this.card.qaEvaluationDTO?.participation]
+          data: [this.parse(this.card.feEvaluationDTO?.participation),
+            this.parse(this.card.beEvaluationDTO?.participation),
+            this.parse(this.card.qaEvaluationDTO?.participation)]
         },
         {
           name: 'Technical skills',
-          data: [this.card.feEvaluationDTO?.techSkills,
-            this.card.beEvaluationDTO?.techSkills,
-            this.card.qaEvaluationDTO?.techSkills]
+          data: [this.parse(this.card.feEvaluationDTO?.techSkills),
+            this.parse(this.card.beEvaluationDTO?.techSkills),
+            this.parse(this.card.qaEvaluationDTO?.techSkills)]
         },
         {
           name: 'Learning pace',
-          data: [this.card.feEvaluationDTO?.learningPace,
-            this.card.beEvaluationDTO?.learningPace,
-            this.card.qaEvaluationDTO?.learningPace]
+          data: [this.parse(this.card.feEvaluationDTO?.learningPace),
+            this.parse(this.card.beEvaluationDTO?.learningPace),
+            this.parse(this.card.qaEvaluationDTO?.learningPace)]
         },
         {
           name: 'Extra mile',
-          data: [this.card.feEvaluationDTO?.extraMile,
-            this.card.beEvaluationDTO?.extraMile,
-            this.card.qaEvaluationDTO?.extraMile]
+          data: [this.parse(this.card.feEvaluationDTO?.extraMile),
+            this.parse(this.card.beEvaluationDTO?.extraMile),
+            this.parse(this.card.qaEvaluationDTO?.extraMile)]
         },
         {
           name: 'Joint evaluation',
-          data: [this.card.feEvaluationDTO?.jointEvaluation,
-            this.card.beEvaluationDTO?.jointEvaluation,
-            this.card.qaEvaluationDTO?.jointEvaluation]
+          data: [this.parse(this.card.feEvaluationDTO?.jointEvaluation),
+            this.parse(this.card.beEvaluationDTO?.jointEvaluation),
+            this.parse(this.card.qaEvaluationDTO?.jointEvaluation)]
         }
       ],
       chart: {
@@ -129,6 +127,11 @@ export class EvaluationCardComponent implements OnInit {
         }
       }
     };
+  }
+
+  parse(value: number | undefined | null): number {
+    if (value === null || value === undefined) { return 0; }
+    return parseFloat(value.toFixed(1));
   }
 
 }
