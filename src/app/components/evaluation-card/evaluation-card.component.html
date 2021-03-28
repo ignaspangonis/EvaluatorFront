@@ -18,8 +18,8 @@
     [stroke]="chartOptions.stroke"
     [tooltip]="chartOptions.tooltip"
     [xaxis]="chartOptions.xaxis"
-    *ngIf="card.feEvaluationDTO != null &&
-           card.beEvaluationDTO != null &&
+    *ngIf="card.feEvaluationDTO != null ||
+           card.beEvaluationDTO != null ||
            card.qaEvaluationDTO != null"
   ></apx-chart>
   <div class="stream-section" *ngIf="card">
