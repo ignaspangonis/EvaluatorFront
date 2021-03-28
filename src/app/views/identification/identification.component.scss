@@ -1,6 +1,13 @@
-form{
-  margin-top: 5%;
-  margin-left: 10%;
+.container {
+  min-height: 600px;
+}
+
+form {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .go-button{

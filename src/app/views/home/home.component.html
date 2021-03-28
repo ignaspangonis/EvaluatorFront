@@ -1,38 +1,42 @@
+<div id="content-wrapper">
 <app-navbar [mentorId]="mentorId"></app-navbar>
 <div class="container">
-    <p>
-        <mat-toolbar>
-          <span>You are evaluating {{mentorStream}} students</span>
-        </mat-toolbar>
-    </p>
-    <mat-tab-group mat-align-tabs="center" *ngIf="students$ | async as students">
-        <mat-tab label="Not evaluated students">
-            <div class="card">
-                <div *ngFor="let student of students">
-                    <mat-card class="example-card" *ngIf="!student.evaluated">
-                        <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
-                        <mat-card-title>{{student.name}}</mat-card-title>
-                        <mat-card-actions>
-                          <a mat-raised-button color="primary" [routerLink]="['/mentor/', mentorId, 'student', student.id]" [queryParams]= "{isEvaluated: 'false'}">Evaluate student</a>
-                          <button mat-raised-button color="accent" (click)="openDialog(student)">View card</button>
-                        </mat-card-actions>
-                    </mat-card>
-                </div>
-            </div>
-        </mat-tab>
-        <mat-tab label="Evaluated students">
-            <div class="card">
-                <div *ngFor="let student of students">
-                    <mat-card class="example-card" *ngIf="student.evaluated">
-                        <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
-                        <mat-card-title>{{student.name}}</mat-card-title>
-                        <mat-card-actions>
-                            <a mat-raised-button color="primary" [routerLink]="['/mentor/', mentorId, 'student', student.id]" [queryParams]= "{isEvaluated: 'true'}">Edit evaluation</a>
-                        <button mat-raised-button color="accent" (click)="openDialog(student)">View card</button>
-                        </mat-card-actions>
-                    </mat-card>
-                </div>
-            </div>
-        </mat-tab>
-      </mat-tab-group>
+  <mat-toolbar>
+    <span>You are evaluating {{mentorStream}} students</span>
+  </mat-toolbar>
+
+  <mat-tab-group mat-align-tabs="center" *ngIf="students$ | async as students; else loading">
+    <mat-tab label="Unevaluated students">
+      <div class="card">
+        <div *ngFor="let student of students">
+          <mat-card class="example-card" *ngIf="!student.evaluated">
+            <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
+            <mat-card-title>{{student.name}}</mat-card-title>
+            <mat-card-actions>
+              <a mat-raised-button color="primary" [routerLink]="['/mentor/', mentorId, 'student', student.id]" [queryParams]= "{isEvaluated: 'false'}">Evaluate student</a>
+              <button mat-raised-button color="accent" (click)="openDialog(student)">View card</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Evaluated students">
+      <div class="card">
+        <div *ngFor="let student of students">
+          <mat-card class="example-card" *ngIf="student.evaluated">
+            <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
+            <mat-card-title>{{student.name}}</mat-card-title>
+            <mat-card-actions>
+              <a mat-raised-button color="primary" [routerLink]="['/mentor/', mentorId, 'student', student.id]" [queryParams]= "{isEvaluated: 'true'}">Edit evaluation</a>
+              <button mat-raised-button color="accent" (click)="openDialog(student)">View card</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <ng-template #loading id="loading">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </ng-template>
+</div>
 </div>

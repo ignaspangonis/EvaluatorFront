@@ -1,35 +1,38 @@
 <mat-toolbar color="primary" class="navbar">
   Welcome to evaluation platform!
 </mat-toolbar>
+<div class="container">
+  <form [formGroup]="identificationForm" id="form">
+    <h1>Please select who you are:</h1>
+    <div id="mentor">
+      <mat-form-field appearance="fill">
+        <mat-select formControlName="selectedMentor">
+          <mat-option *ngFor="let mentor of mentors" [value]="mentor.id">
+            {{ mentor.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-<form [formGroup]="identificationForm" id="form">
-  <h1>Please select who you are:</h1>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="selectedMentor">
-      <mat-option *ngFor="let mentor of mentors" [value]="mentor.id">
-        {{ mentor.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+      <button
+        class="go-button"
+        [disabled]="!identificationForm.valid"
+        type="button"
+        mat-raised-button
+        color="primary"
+        [routerLink]="['mentor/', selectedMentor.value, 'home']"
+      >
+        Go
+      </button>
 
-  <button
-    class="go-button"
-    [disabled]="!identificationForm.valid"
-    type="button"
-    mat-raised-button
-    color="primary"
-    [routerLink]="['mentor/', selectedMentor.value, 'home']"
-  >
-    Go
-  </button>
-
-  <button
-    class="admin-button"
-    type="button"
-    mat-raised-button
-    color="primary"
-    [routerLink]="['admin/home']"
-  >
-    I am admin
-  </button>
-</form>
+      <button
+        class="admin-button"
+        type="button"
+        mat-raised-button
+        color="primary"
+        [routerLink]="['admin/home']"
+      >
+        I am admin
+      </button>
+    </div>
+  </form>
+</div>
