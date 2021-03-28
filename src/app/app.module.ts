@@ -14,7 +14,7 @@ import { IdentificationComponent } from './views/identification/identification.c
 import { AdminHomeComponent } from './views/admin-home/admin-home.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { MentorAdditionComponent } from './components/mentor-addition/mentor-addition.component';
-
+import {NgApexchartsModule} from 'ng-apexcharts';
 
 
 
@@ -40,6 +40,7 @@ import { MentorAdditionComponent } from './components/mentor-addition/mentor-add
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    NgApexchartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,110 +1,110 @@
 <app-navbar [mentorId]="mentorId"></app-navbar>
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  <!--  <hr>-->
-  <!--  Value: {{ profileForm.value | json }}-->
-  <!--  <hr>-->
-  <div class="container">
-    <mat-card class="example-card" *ngIf="student$ | async as student">
-      <img mat-card-image src="{{ student.image }}" alt="{{ student.name }}" />
-      <mat-card-header>
-        <mat-card-title>{{ student.name }}</mat-card-title>
-      </mat-card-header>
-    </mat-card>
+<div class="container">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <!--  <hr>-->
+    <!--  Value: {{ profileForm.value | json }}-->
+    <!--  <hr>-->
+      <div class="mat-display-2">Student form</div>
+      <mat-card class="example-card" *ngIf="student$ | async as student">
+        <img mat-card-image src="{{ student.image }}" alt="{{ student.name }}" />
+        <mat-card-header>
+          <mat-card-title>{{ student.name }}</mat-card-title>
+        </mat-card-header>
+      </mat-card>
 
-    <label for="participation" class="example-radio-group-label"
-      >Participation</label
-    >
-    <p>
-      Please evaluate activity of the student during the classes (homework,
-      tasks in class).
-    </p>
-    <mat-error *ngIf="!isValid && participation.hasError('required')">
-      Please choose one of the options.
-    </mat-error>
-    <mat-radio-group
-      aria-labelledby="example-radio-group-label"
-      class="example-radio-group"
-      formControlName="participation"
-      id="participation"
-    >
-      <mat-radio-button value="1">Passive</mat-radio-button>
-      <mat-radio-button value="2">Active</mat-radio-button>
-      <mat-radio-button value="3">Very active</mat-radio-button>
-    </mat-radio-group>
+      <label for="participation" class="example-radio-group-label"
+        >Participation</label
+      >
+      <p>
+        Please evaluate activity of the student during the classes (homework,
+        tasks in class).
+      </p>
+      <mat-error *ngIf="!isValid && participation.hasError('required')">
+        Please choose one of the options.
+      </mat-error>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        formControlName="participation"
+        id="participation"
+      >
+        <mat-radio-button value="1">Passive</mat-radio-button>
+        <mat-radio-button value="2">Active</mat-radio-button>
+        <mat-radio-button value="3">Very active</mat-radio-button>
+      </mat-radio-group>
 
-    <label for="techSkills" class="example-radio-group-label"
-      >Technical skills</label
-    >
-    <p>
-      Please evaluate the technical skills that the student has after the
-      classes.
-    </p>
-    <mat-error *ngIf="!isValid && techSkills.hasError('required')">
-      Please choose one of the options.
-    </mat-error>
-    <mat-radio-group
-      id="techSkills"
-      aria-labelledby="example-radio-group-label"
-      class="example-radio-group"
-      formControlName="techSkills"
-    >
-      <mat-radio-button value="1">Beginner</mat-radio-button>
-      <mat-radio-button value="2">Intermediate</mat-radio-button>
-      <mat-radio-button value="3">Advanced</mat-radio-button>
-    </mat-radio-group>
+      <label for="techSkills" class="example-radio-group-label"
+        >Technical skills</label
+      >
+      <p>
+        Please evaluate the technical skills that the student has after the
+        classes.
+      </p>
+      <mat-error *ngIf="!isValid && techSkills.hasError('required')">
+        Please choose one of the options.
+      </mat-error>
+      <mat-radio-group
+        id="techSkills"
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        formControlName="techSkills"
+      >
+        <mat-radio-button value="1">Beginner</mat-radio-button>
+        <mat-radio-button value="2">Intermediate</mat-radio-button>
+        <mat-radio-button value="3">Advanced</mat-radio-button>
+      </mat-radio-group>
 
-    <label for="learningPace" class="example-radio-group-label"
-      >Learning pace</label
-    >
-    <p>Please evaluate the learning pace of the student.</p>
-    <mat-error *ngIf="!isValid && learningPace.hasError('required')">
-      Please choose one of the options.
-    </mat-error>
-    <mat-radio-group
-      id="learningPace"
-      aria-labelledby="example-radio-group-label"
-      class="example-radio-group"
-      formControlName="learningPace"
-    >
-      <mat-radio-button value="1">Slow</mat-radio-button>
-      <mat-radio-button value="2">Medium</mat-radio-button>
-      <mat-radio-button value="3">Fast</mat-radio-button>
-    </mat-radio-group>
+      <label for="learningPace" class="example-radio-group-label"
+        >Learning pace</label
+      >
+      <p>Please evaluate the learning pace of the student.</p>
+      <mat-error *ngIf="!isValid && learningPace.hasError('required')">
+        Please choose one of the options.
+      </mat-error>
+      <mat-radio-group
+        id="learningPace"
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        formControlName="learningPace"
+      >
+        <mat-radio-button value="1">Slow</mat-radio-button>
+        <mat-radio-button value="2">Medium</mat-radio-button>
+        <mat-radio-button value="3">Fast</mat-radio-button>
+      </mat-radio-group>
 
-    <label for="extraMile" class="example-radio-group-label">Extra mile</label>
-    <p>
-      Please evaluate the degree to which the student was proactive, took more
-      responsibilities than were required.
-    </p>
-    <mat-error *ngIf="!isValid && extraMile.hasError('required')">
-      Please choose one of the options.
-    </mat-error>
-    <mat-radio-group
-      id="extraMile"
-      aria-labelledby="example-radio-group-label"
-      class="example-radio-group"
-      formControlName="extraMile"
-    >
-      <mat-radio-button value="1">None</mat-radio-button>
-      <mat-radio-button value="2">Some</mat-radio-button>
-      <mat-radio-button value="3">A lot</mat-radio-button>
-    </mat-radio-group>
+      <label for="extraMile" class="example-radio-group-label">Extra mile</label>
+      <p>
+        Please evaluate the degree to which the student was proactive, took more
+        responsibilities than were required.
+      </p>
+      <mat-error *ngIf="!isValid && extraMile.hasError('required')">
+        Please choose one of the options.
+      </mat-error>
+      <mat-radio-group
+        id="extraMile"
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        formControlName="extraMile"
+      >
+        <mat-radio-button value="1">None</mat-radio-button>
+        <mat-radio-button value="2">Some</mat-radio-button>
+        <mat-radio-button value="3">A lot</mat-radio-button>
+      </mat-radio-group>
 
-    <label class="example-radio-group-label">Comments (optional)</label>
-    <div>
-      {{ charsRemaining$ | async }}/{{ maxCharacters }} characters left.
-    </div>
-    <mat-form-field appearance="fill">
-      <textarea
-        matInput
-        formControlName="comment"
-        ngModel
-        maxlength="150"
-      ></textarea>
-    </mat-form-field>
+      <label class="example-radio-group-label">Comments (optional)</label>
+      <div>
+        {{ charsRemaining$ | async }}/{{ maxCharacters }} characters left.
+      </div>
+      <mat-form-field appearance="fill">
+        <textarea
+          matInput
+          formControlName="comment"
+          ngModel
+          maxlength="150"
+        ></textarea>
+      </mat-form-field>
 
-    <mat-error *ngIf="errorMsg">Error: {{errorMsg}}</mat-error>
-    <button mat-raised-button color="primary" type="submit">Submit</button>
-
-  </div>
-</form>
+      <mat-error *ngIf="errorMsg">Error: {{errorMsg}}</mat-error>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</div>

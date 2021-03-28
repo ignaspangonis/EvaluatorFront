@@ -13,6 +13,9 @@ import { NgModule } from '@angular/core';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 const MaterialComponents = [
   MatToolbarModule,
@@ -29,6 +32,7 @@ const MaterialComponents = [
   MatSnackBarModule,
   MatListModule,
   MatCheckboxModule
+  MatProgressSpinnerModule
 ];
 
 @NgModule({
