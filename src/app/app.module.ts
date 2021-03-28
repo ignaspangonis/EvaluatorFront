@@ -11,6 +11,7 @@ import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { EvaluationCardComponent } from './components/evaluation-card/evaluation-card.component';
 import { IdentificationComponent } from './views/identification/identification.component';
+import {NgApexchartsModule} from 'ng-apexcharts';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { IdentificationComponent } from './views/identification/identification.c
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    NgApexchartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
