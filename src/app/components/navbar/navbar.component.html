@@ -1,16 +1,16 @@
-<div>
-  <mat-toolbar color="primary" class="navbar">
 
-    <div>
-      <mat-icon routerLink="/home" aria-hidden="false" aria-label="Example home icon" id="home-icon">home</mat-icon>
-      <a [routerLink]="['/mentor/', mentorId, 'home']" >Home</a>
-    </div>
+<mat-toolbar color="primary" class="navbar">
 
-    <div>
-      <span class="mentorName" >Signed in as: {{ (mentor$ | async).name }}</span>
-      <a class="exit" mat-raised-button color="warn" [routerLink]="['/']" >Exit</a>
-    </div>
+  <div>
+    <mat-icon routerLink="/home" aria-hidden="false" id="home-icon">assignment_ind</mat-icon>
+    <a id="home" [routerLink]="['/mentor/', mentorId, 'home']" >Students</a>
+  </div>
+
+  <div>
+    <span class="mentorName" >Signed in as: <b>{{ (mentor$ | async).name }}</b></span>
+    <a id="exit" mat-raised-button color="warn" [routerLink]="['/']" >Sign out</a>
+  </div>
 
 
-  </mat-toolbar>
-</div>
+</mat-toolbar>
+
