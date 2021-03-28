@@ -7,7 +7,7 @@
 <img src="{{data.stud.image}}" alt="{{data.stud.name}}">
 <div mat-dialog-content>
   <h2>Streams</h2>
-  <div *ngIf="card != null">
+  <div *ngIf="card != null; else loading">
     <apx-chart
       [series]="chartOptions.series"
       [chart]="chartOptions.chart"
@@ -19,8 +19,14 @@
       [stroke]="chartOptions.stroke"
       [tooltip]="chartOptions.tooltip"
       [xaxis]="chartOptions.xaxis"
+      *ngIf="card.feEvaluationDTO != null ||
+             card.beEvaluationDTO != null ||
+             card.qaEvaluationDTO != null"
     ></apx-chart>
   </div>
+  <ng-template #loading id="loading">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </ng-template>
   <div class="stream-section" *ngIf="card">
     <div class="stream">
       <h3>Frontend</h3>

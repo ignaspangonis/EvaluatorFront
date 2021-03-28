@@ -5,7 +5,7 @@
     <span>You are evaluating {{mentorStream}} students</span>
   </mat-toolbar>
 
-  <mat-tab-group mat-align-tabs="center" *ngIf="students$ | async as students">
+  <mat-tab-group mat-align-tabs="center" *ngIf="students$ | async as students; else loading">
     <mat-tab label="Unevaluated students">
       <div class="card">
         <div *ngFor="let student of students">
@@ -35,5 +35,8 @@
       </div>
     </mat-tab>
   </mat-tab-group>
+  <ng-template #loading id="loading">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </ng-template>
 </div>
 </div>
