@@ -1,0 +1,28 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  //justify-content: left;
+
+  div {
+    display: flex;
+    a {
+      padding-left: 0;
+    }
+  }
+}
+
+#home-icon {
+  font-size: 36px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+
+.navbar .exit {
+  margin-left: auto;
+  padding-right: 0;
+}
+
+.admin-label {
+  color: antiquewhite;
+  margin-right: 20px;
+}

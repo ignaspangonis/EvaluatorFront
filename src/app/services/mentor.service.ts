@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Mentor} from '../shared/mentor';
 import {Observable} from 'rxjs';
@@ -18,5 +18,13 @@ export class MentorService {
   }
   getMentors(): Observable<Mentor[]>{
     return this.httpClient.get<Mentor[]>(this.url);
+  }
+  addMentor(mentor: Mentor): Observable<Mentor>{
+    return this.httpClient.post<Mentor>(this.url, mentor);
+
+  }
+
+  deleteMentor(id: number): Observable<Mentor>{
+    return this.httpClient.delete<Mentor>(this.url + '/' + id);
   }
 }

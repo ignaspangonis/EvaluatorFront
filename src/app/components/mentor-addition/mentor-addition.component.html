@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Add mentor</h1>
+<form
+  class="example-form"
+  [formGroup]="mentorAdditionForm"
+  (ngSubmit)="onSubmit()"
+>
+  <mat-form-field class="example-full-width">
+    <mat-label>Name</mat-label>
+    <textarea matInput formControlName="name"></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Surname</mat-label>
+    <textarea matInput formControlName="surname"></textarea>
+  </mat-form-field>
+  <div class="buttons">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="submit-button"
+      [disabled]="!mentorAdditionForm.valid"
+    >
+      Submit
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      class="cancel-button"
+      (click)="close()"
+      color="accent"
+    >
+      Cancel
+    </button>
+  </div>
+</form>
+
+<div mat-dialog-content></div>

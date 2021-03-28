@@ -11,6 +11,11 @@ import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { EvaluationCardComponent } from './components/evaluation-card/evaluation-card.component';
 import { IdentificationComponent } from './views/identification/identification.component';
+import { AdminHomeComponent } from './views/admin-home/admin-home.component';
+import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
+import { MentorAdditionComponent } from './components/mentor-addition/mentor-addition.component';
+
+
 
 
 @NgModule({
@@ -21,6 +26,9 @@ import { IdentificationComponent } from './views/identification/identification.c
     NavbarComponent,
     EvaluationCardComponent,
     IdentificationComponent,
+    AdminHomeComponent,
+    AdminNavbarComponent,
+    MentorAdditionComponent,
 
   ],
   entryComponents: [EvaluationCardComponent],

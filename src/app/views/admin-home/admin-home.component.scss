@@ -20,14 +20,23 @@ p {
   font-size: 19px;
 }
 
-.savedEvaluationText {
-  display: flex;
-  justify-content: flex-start;
-  font-size: 1.2em;
-  color:rebeccapurple;
-  height: 20px;
+.mentors-card {
+  width: 25%;
+  margin-right: 40px;
+
 }
 
+.mentors-cards{
+  margin-left: 10%;
+  margin-top: 30px;
+}
 
+.add-button{
+  margin-right: 10px;
+}
+
+.mentor-card-buttons{
+  margin-top: 20px;
+}
 
 

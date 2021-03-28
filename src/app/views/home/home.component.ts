@@ -24,8 +24,8 @@ export class HomeComponent implements OnInit {
   mentorStream;
   mentorId: string;
 
-  constructor(public dialog: MatDialog, private studentService: StudentService,  private mentorService: MentorService,
-              private evaluationService: EvaluationService, private snackBar: MatSnackBar, private route: ActivatedRoute) { }
+      constructor(public dialog: MatDialog, private studentService: StudentService,  private mentorService: MentorService,
+                  private evaluationService: EvaluationService, private snackBar: MatSnackBar, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(

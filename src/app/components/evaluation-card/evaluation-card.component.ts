@@ -3,7 +3,6 @@ import {StudentService} from '../../services/student.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {EvaluationCard} from '../../shared/evaluation-card';
 import {Student} from '../../shared/student';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-evaluation-card',

@@ -1,16 +1,13 @@
 <div>
   <mat-toolbar color="primary" class="navbar">
-
     <div>
       <mat-icon routerLink="/home" aria-hidden="false" aria-label="Example home icon" id="home-icon">home</mat-icon>
-      <a [routerLink]="['/mentor/', mentorId, 'home']" >Home</a>
+      <a [routerLink]="['/admin/home']" >Home</a>
     </div>
-
     <div>
-      <span *ngIf="mentor$ | async; let mentor" class="mentorName" >Signed in as: {{mentor.name}}</span>
+      <span class="admin-label">Signed in as: Admin</span>
       <a class="exit" mat-raised-button color="warn" [routerLink]="['/']" >Exit</a>
     </div>
-
 
   </mat-toolbar>
 </div>
