@@ -7,7 +7,7 @@
   </div>
 
   <div>
-    <span class="mentorName" >Signed in as: {{ (mentor$ | async).name }}</span>
+    <span class="mentorName" >Signed in as: <b>{{ (mentor$ | async).name }}</b></span>
     <a id="exit" mat-raised-button color="warn" [routerLink]="['/']" >Sign out</a>
   </div>
 
