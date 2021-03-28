@@ -3,6 +3,7 @@ p {
 }
 .container {
   background: #f5f5f5;
+  min-height: 100vh;
   mat-tab-group {
     background: white;
     border-radius: 30px;
