@@ -3,6 +3,15 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Students">
     <div class="card" *ngIf="students$ | async as students" >
+      <div class="card">
+        <mat-card class="example-card">
+          <img mat-card-image src="https://gladstoneentertainment.com/wp-content/uploads/2018/08/blank-portrait.png" alt="blank-portrait">
+          <mat-card-title></mat-card-title>
+          <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="openStudentDialog()">Add student</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
       <div *ngFor="let student of students">
         <mat-card class="example-card">
           <img
@@ -18,6 +27,7 @@
         </mat-card>
       </div>
     </div>
+
   </mat-tab>
 
 
@@ -38,7 +48,7 @@
           </ng-container>
         </mat-selection-list>
         <div class="mentor-card-buttons">
-        <button mat-raised-button color="primary" class="add-button" (click)="openDialog('Front-end', mentors)">Add mentor</button>
+        <button mat-raised-button color="primary" class="add-button" (click)="openMentorDialog('Front-end', mentors)">Add mentor</button>
         <button mat-raised-button color="warn" [disabled]="FEmentor.selectedOptions.selected.length==0" (click)="deleteMentors(FEmentor.selectedOptions.selected, mentors)">Delete</button>
         </div>
       </mat-card>
@@ -54,7 +64,7 @@
           </ng-container>
         </mat-selection-list>
         <div class="mentor-card-buttons">
-          <button mat-raised-button color="primary" class="add-button" (click)="openDialog('Back-end', mentors)">Add mentor</button>
+          <button mat-raised-button color="primary" class="add-button" (click)="openMentorDialog('Back-end', mentors)">Add mentor</button>
           <button mat-raised-button color="warn" [disabled]="BEmentor.selectedOptions.selected.length==0" (click)="deleteMentors(BEmentor.selectedOptions.selected, mentors)">Delete</button>
         </div>
       </mat-card>
@@ -70,7 +80,7 @@
           </ng-container>
         </mat-selection-list>
         <div class="mentor-card-buttons">
-          <button mat-raised-button color="primary" class="add-button" (click)="openDialog('QA', mentors)">Add mentor</button>
+          <button mat-raised-button color="primary" class="add-button" (click)="openMentorDialog('QA', mentors)">Add mentor</button>
           <button mat-raised-button color="warn" [disabled]="QAmentor.selectedOptions.selected.length==0" (click)="deleteMentors(QAmentor.selectedOptions.selected, mentors)">Delete</button>
         </div>
       </mat-card>

@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Add student</h1>
+<form
+  class="example-form"
+  [formGroup]="studentAdditionForm"
+
+>
+  <mat-form-field class="example-full-width">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Surname</mat-label>
+    <input matInput formControlName="surname">
+  </mat-form-field>
+  <div>
+    <img mat-card-image id="image" [attr.src]="imageUrl" alt="blank-portrait">
+    <input style="display: none" type="file" accept="image/x-png,image/jpeg" (change)="onFileSelected($event)" #fileInput>
+    <button mat-raised-button (click)="fileInput.click()">Upload photo</button>
+  </div>
+
+
+  <div class="buttons">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="submit-button"
+      [disabled]="!studentAdditionForm.valid"
+      (click)="onSubmit()"
+    >
+      Submit
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      class="cancel-button"
+      (click)="close()"
+      color="accent"
+    >
+      Cancel
+    </button>
+  </div>
+</form>
+
+<div mat-dialog-content></div>
