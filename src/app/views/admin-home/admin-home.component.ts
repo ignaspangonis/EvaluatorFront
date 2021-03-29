@@ -1,12 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatListOption, MatSelectionList} from '@angular/material/list';
+
+import {MatDialog} from '@angular/material/dialog';
+import {Mentor} from '../../shared/mentor';
+import {MentorAdditionComponent} from '../../components/mentor-addition/mentor-addition.component';
+import {MentorService} from '../../services/mentor.service';
 import {Observable} from 'rxjs';
 import {Student} from '../../shared/student';
+import { StudentAdditionComponent } from 'src/app/components/student-addition/student-addition.component';
 import {StudentService} from '../../services/student.service';
-import {Mentor} from '../../shared/mentor';
-import {MentorService} from '../../services/mentor.service';
-import {MatDialog} from '@angular/material/dialog';
-import {MentorAdditionComponent} from '../../components/mentor-addition/mentor-addition.component';
-import {MatListOption, MatSelectionList} from '@angular/material/list';
 
 @Component({
   selector: 'app-admin-home',
@@ -25,7 +27,7 @@ export class AdminHomeComponent implements OnInit {
     this.mentors$ = this.mentorService.getMentors();
   }
 
-  openDialog(stream: string, mentors: Mentor[]) {
+  openMentorDialog(stream: string, mentors: Mentor[]) {
     const mentorAdditionDialog = this.dialog.open(MentorAdditionComponent, {
       data: {str: stream},
       width: '400px',
@@ -34,6 +36,12 @@ export class AdminHomeComponent implements OnInit {
       if (response != null) {
       mentors.splice(0, 0, response.mentor);
       }
+    });
+   }
+   openStudentDialog() {
+    const mentorAdditionDialog = this.dialog.open(StudentAdditionComponent, {
+      width: '600px',
+      height: '600px'
     });
    }
    deleteMentors(selectedOptions: MatListOption[], mentors: Mentor[]){

@@ -1,10 +1,10 @@
 import { RouterModule, Routes } from '@angular/router';
 
+import {AdminHomeComponent} from './views/admin-home/admin-home.component';
 import { FormComponent } from './views/form/form.component';
 import { HomeComponent } from './views/home/home.component';
-import { NgModule } from '@angular/core';
 import {IdentificationComponent} from './views/identification/identification.component';
-import {AdminHomeComponent} from './views/admin-home/admin-home.component';
+import { NgModule } from '@angular/core';
 
 export { Routes } from '@angular/router';
 
