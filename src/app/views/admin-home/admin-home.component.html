@@ -3,6 +3,15 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Students">
     <div class="card" *ngIf="students$ | async as students" >
+      <div class="card">
+        <mat-card class="example-card">
+          <img mat-card-image src="https://gladstoneentertainment.com/wp-content/uploads/2018/08/blank-portrait.png" alt="blank-portrait">
+          <mat-card-title></mat-card-title>
+          <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="openStudentDialog()">Add student</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
       <div *ngFor="let student of students">
         <mat-card class="example-card">
           <img
@@ -14,15 +23,7 @@
         </mat-card>
       </div>
     </div>
-    <div class="card">
-      <mat-card class="example-card">
-              <img mat-card-image src="https://gladstoneentertainment.com/wp-content/uploads/2018/08/blank-portrait.png" alt="blank-portrait">
-              <mat-card-title></mat-card-title>
-              <mat-card-actions>
-                <button mat-raised-button color="accent" (click)="openStudentDialog()">Add student</button>
-              </mat-card-actions>
-          </mat-card>
-   </div>
+
   </mat-tab>
 
 
