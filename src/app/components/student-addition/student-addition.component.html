@@ -13,12 +13,21 @@
     <mat-label>Surname</mat-label>
     <textarea matInput formControlName="surname"></textarea>
   </mat-form-field>
+  <div>
+    <img mat-card-image id="image" [attr.src]="imageUrl" alt="blank-portrait">
+    <input style="display: none" type="file" accept="image/x-png,image/jpeg" (change)="onFileSelected($event)" #fileInput>
+    <button mat-raised-button (click)="fileInput.click()">Upload photo</button>
+  </div>
+
+
   <div class="buttons">
     <button
       mat-raised-button
       color="primary"
       type="submit"
       class="submit-button"
+      [disabled]="!studentAdditionForm.valid"
+      (click)="onSubmit()"
     >
       Submit
     </button>
