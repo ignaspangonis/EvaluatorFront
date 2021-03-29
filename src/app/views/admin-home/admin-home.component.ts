@@ -1,12 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatListOption, MatSelectionList} from '@angular/material/list';
+
+import {MatDialog} from '@angular/material/dialog';
+import {Mentor} from '../../shared/mentor';
+import {MentorAdditionComponent} from '../../components/mentor-addition/mentor-addition.component';
+import {MentorService} from '../../services/mentor.service';
 import {Observable} from 'rxjs';
 import {Student} from '../../shared/student';
 import {StudentService} from '../../services/student.service';
-import {Mentor} from '../../shared/mentor';
-import {MentorService} from '../../services/mentor.service';
-import {MatDialog} from '@angular/material/dialog';
-import {MentorAdditionComponent} from '../../components/mentor-addition/mentor-addition.component';
-import {MatListOption, MatSelectionList} from '@angular/material/list';
 
 @Component({
   selector: 'app-admin-home',
@@ -45,4 +46,9 @@ export class AdminHomeComponent implements OnInit {
      }
    }
 
+   deleteStudent(studentId: number, studentName: string){
+    if(confirm("Are you sure you want to delete " + studentName + " ?")) {
+      this.studentService.deleteStudent(studentId).subscribe(() => this.studentService.getAllStudents());
+      };
+    }
 }
