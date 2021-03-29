@@ -1,16 +1,13 @@
 <mat-toolbar color="primary" class="navbar">
+
   <div>
-    <span *ngIf="mentor$ | async; let mentor" class="mentorName"
-      >Signed in as: {{ mentor.name }}</span
-    >
-    <a id="exit" mat-raised-button color="warn" [routerLink]="['/']"
-      >Sign out</a
-    >
+    <mat-icon routerLink="/home" aria-hidden="false" id="home-icon">assignment_ind</mat-icon>
+    <a id="home" [routerLink]="['/mentor/', mentorId, 'home']" >Students</a>
   </div>
+
   <div>
-    <mat-icon routerLink="/home" aria-hidden="false" id="home-icon"
-      >assignment_ind</mat-icon
-    >
-    <a id="home" [routerLink]="['/mentor/', mentorId, 'home']">Students</a>
+        <span *ngIf="mentor$ | async; let mentor" class="mentorName"
+          >Signed in as:<b> {{ mentor.name }}</b></span>
+    <a id="exit" mat-raised-button color="warn" [routerLink]="['/']" >Sign out</a>
   </div>
 </mat-toolbar>
