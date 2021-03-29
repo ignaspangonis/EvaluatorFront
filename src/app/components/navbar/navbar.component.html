@@ -1,4 +1,3 @@
-
 <mat-toolbar color="primary" class="navbar">
 
   <div>
@@ -7,10 +6,8 @@
   </div>
 
   <div>
-    <span class="mentorName" >Signed in as: <b>{{ (mentor$ | async).name }}</b></span>
+        <span *ngIf="mentor$ | async; let mentor" class="mentorName"
+          >Signed in as:<b> {{ mentor.name }}</b></span>
     <a id="exit" mat-raised-button color="warn" [routerLink]="['/']" >Sign out</a>
   </div>
-
-
 </mat-toolbar>
-

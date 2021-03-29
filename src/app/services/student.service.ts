@@ -15,10 +15,12 @@ export class StudentService {
   constructor(private httpClient: HttpClient) {
   }
 
+  getAllStudents(): Observable<Student[]> {
+    return this.httpClient.get<Student[]>('https://my-evaluation-platform.herokuapp.com/api/student');
+  }
 
   getStudents(mentorId: string): Observable<Student[]> {
     return this.httpClient.get<Student[]>(this.url + mentorId + `/student`);
-
   }
 
   getStudentById(id: string): Observable<Student> {

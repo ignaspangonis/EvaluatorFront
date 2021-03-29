@@ -1,5 +1,5 @@
 export interface Mentor {
-    id: string;
+    id?: string;
     name: string;
     stream: string;
   }
