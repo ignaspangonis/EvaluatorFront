@@ -15,6 +15,7 @@ import { AdminHomeComponent } from './views/admin-home/admin-home.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { MentorAdditionComponent } from './components/mentor-addition/mentor-addition.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { StudentAdditionComponent } from './components/student-addition/student-addition.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     AdminHomeComponent,
     AdminNavbarComponent,
     MentorAdditionComponent,
+    StudentAdditionComponent,
 
   ],
   entryComponents: [EvaluationCardComponent],

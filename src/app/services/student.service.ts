@@ -1,9 +1,10 @@
-import {Evaluation} from '../shared/evaluation';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
-import {Student} from '../shared/student';
+
+import {Evaluation} from '../shared/evaluation';
 import {EvaluationCard} from '../shared/evaluation-card';
+import {Injectable} from '@angular/core';
+import {Student} from '../shared/student';
 import {catchError} from 'rxjs/operators';
 
 @Injectable({
@@ -13,6 +14,14 @@ export class StudentService {
   private url = 'https://my-evaluation-platform.herokuapp.com/api/mentor/';
 
   constructor(private httpClient: HttpClient) {
+  }
+
+  addStudent(student: Student): Observable<Student>{
+    return this.httpClient.post<Student>('https://my-evaluation-platform.herokuapp.com/api/student', student);
+  }
+
+  updateStudent(student: Student, id: string){
+    return this.httpClient.put<Student>('https://my-evaluation-platform.herokuapp.com/api/student' + id, student);
   }
 
   getAllStudents(): Observable<Student[]> {
@@ -74,5 +83,9 @@ export class StudentService {
         errorMsg = 'Server error';
     }
     return throwError(errorMsg);
+  }
+
+  deleteStudent(id: number): Observable<Student>{
+    return this.httpClient.delete<Student>(`https://my-evaluation-platform.herokuapp.com/api/student/${id}`);
   }
 }

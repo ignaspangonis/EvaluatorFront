@@ -1,0 +1,69 @@
+<h1 mat-dialog-title>Add student</h1>
+<form class="example-form" [formGroup]="studentAdditionForm">
+  <mat-form-field class="example-full-width">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Surname</mat-label>
+    <input matInput formControlName="surname" />
+  </mat-form-field>
+  <div>
+    <img mat-card-image id="image" [attr.src]="imageUrl" alt="blank-portrait" />
+    <input
+      style="display: none"
+      type="file"
+      accept="image/x-png,image/jpeg"
+      (change)="onFileSelected($event)"
+      #fileInput
+    />
+    <button mat-raised-button (click)="fileInput.click()">Upload photo</button>
+  </div>
+
+  <div class="prefereces-div">
+    <b>Preferences</b>
+
+    <div *ngFor="let preference of preferences">
+      <input type="checkbox" [checked]="checkIfCheckboxWasSelected(preference.value)" (change)="onChange(preference.value, $event)" />
+      {{ preference.value }}<br />
+    </div>
+  </div>
+
+  <div class="contract-div">
+    <label for="contract" class="label"><b>Contract</b></label>
+    <mat-radio-group
+      id="contract"
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      formControlName="contractType"
+    >
+      <mat-radio-button value="Full-time">Full-time</mat-radio-button>
+      <mat-radio-button value="Part-time">Part-time</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div class="buttons">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="submit-button"
+      [disabled]="!studentAdditionForm.valid"
+      (click)="onSubmit()"
+    >
+      Submit
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      class="cancel-button"
+      (click)="close()"
+      color="accent"
+    >
+      Cancel
+    </button>
+  </div>
+</form>
+
+<div mat-dialog-content></div>
