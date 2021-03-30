@@ -48,7 +48,6 @@ export class AdminHomeComponent implements OnInit {
       height: '600px'
     }).afterClosed().subscribe((formData: any) => {
       if (formData != null) {
-        console.log(formData.name);
         this.newStudent.name = formData.name + ' ' + formData.surname;
         this.newStudent.image = formData.image;
         this.newStudent.preferences = formData.preferences;

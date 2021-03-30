@@ -34,8 +34,7 @@ export class StudentAdditionComponent implements OnInit {
       image: [''],
       id: ['']
     });
-    if (this.data.student != null){
-      console.log(this.data.student);
+    if (this.data.student != null) {
       this.studentAdditionForm.patchValue({
         name: this.data.student.name.split(' ')[0],
         surname: this.data.student.name.split(' ')[1],
