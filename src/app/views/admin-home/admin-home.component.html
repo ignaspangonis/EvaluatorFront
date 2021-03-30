@@ -8,7 +8,7 @@
           <img mat-card-image src="https://gladstoneentertainment.com/wp-content/uploads/2018/08/blank-portrait.png" alt="blank-portrait">
           <mat-card-title></mat-card-title>
           <mat-card-actions>
-            <button mat-raised-button color="accent" (click)="openStudentDialog()">Add student</button>
+            <button mat-raised-button color="accent" (click)="openStudentDialog(null, false)">Add student</button>
           </mat-card-actions>
         </mat-card>
       </div>
@@ -21,7 +21,7 @@
           />
           <mat-card-title>{{ student.name }}</mat-card-title>
           <mat-card-actions>
-            <button mat-raised-button color="primary">Edit</button>
+            <button mat-raised-button color="primary" (click)="openStudentDialog(student, true)">Edit</button>
             <button mat-raised-button color="warn" (click)="deleteStudent(student.id, student.name)">Delete</button>
           </mat-card-actions>
         </mat-card>

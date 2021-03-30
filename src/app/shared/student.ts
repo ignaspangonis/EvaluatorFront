@@ -3,4 +3,7 @@ export interface Student {
   name: string;
   image?: string;
   evaluated: boolean;
+  contractType?: string;
+  preferences?: string[];
+
 }

@@ -16,6 +16,14 @@ export class StudentService {
   constructor(private httpClient: HttpClient) {
   }
 
+  addStudent(student: Student): Observable<Student>{
+    return this.httpClient.post<Student>('https://my-evaluation-platform.herokuapp.com/api/student', student);
+  }
+
+  updateStudent(student: Student, id: string){
+    return this.httpClient.put<Student>('https://my-evaluation-platform.herokuapp.com/api/student' + id, student);
+  }
+
   getAllStudents(): Observable<Student[]> {
     return this.httpClient.get<Student[]>('https://my-evaluation-platform.herokuapp.com/api/student');
   }

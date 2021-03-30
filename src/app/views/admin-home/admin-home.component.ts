@@ -9,6 +9,7 @@ import {Observable} from 'rxjs';
 import {Student} from '../../shared/student';
 import { StudentAdditionComponent } from 'src/app/components/student-addition/student-addition.component';
 import {StudentService} from '../../services/student.service';
+import {response} from 'express';
 
 @Component({
   selector: 'app-admin-home',
@@ -19,6 +20,8 @@ export class AdminHomeComponent implements OnInit {
   students$: Observable<Student[]>;
   mentors$: Observable<Mentor[]>;
   mentorsIds: number[] = [];
+  newStudent: Student = {contractType: '', evaluated: false, id: '', image: '', name: '', preferences: []};
+
 
   constructor(private studentService: StudentService, private mentorService: MentorService, public dialog: MatDialog) { }
 
@@ -38,11 +41,26 @@ export class AdminHomeComponent implements OnInit {
       }
     });
    }
-   openStudentDialog() {
-    const mentorAdditionDialog = this.dialog.open(StudentAdditionComponent, {
+   openStudentDialog(student: Student, isStudentExisting: boolean) {
+    const studentAdditionDialog = this.dialog.open(StudentAdditionComponent, {
+      data: {student},
       width: '600px',
       height: '600px'
-    });
+    }).afterClosed().subscribe((formData: any) => {
+      if (formData != null) {
+        console.log(formData.name);
+        this.newStudent.name = formData.name + ' ' + formData.surname;
+        this.newStudent.image = formData.image;
+        this.newStudent.preferences = formData.preferences;
+        this.newStudent.contractType = formData.contractType;
+        if (!isStudentExisting) {
+          this.studentService.addStudent(this.newStudent).subscribe(() => this.students$ = this.studentService.getAllStudents());
+        } else {
+          this.studentService.updateStudent(this.newStudent, this.newStudent.id)
+            .subscribe(() => this.students$ = this.studentService.getAllStudents());
+        }
+      }
+     } ) ;
    }
    deleteMentors(selectedOptions: MatListOption[], mentors: Mentor[]){
     for (const option of selectedOptions) {
