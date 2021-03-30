@@ -23,7 +23,8 @@ export class StudentAdditionComponent implements OnInit {
    }
 
   preferences = [{ value: 'Back-end' }, { value: 'Front-end' }, { value: 'Full-stack' }, { value: 'QA' }];
-  private nameAndSurname: string[];
+  isImageChanged = false;
+  isImageExisting = false;
 
   ngOnInit(): void {
     this.studentAdditionForm = this.fb.group({
@@ -31,11 +32,10 @@ export class StudentAdditionComponent implements OnInit {
       surname: ['', {validators: [Validators.required]}],
       contractType: [''],
       preferences: this.fb.array([]),
-      image: [''],
+      image: ['', {validators: [Validators.required]}],
       id: ['']
     });
     if (this.data.student != null){
-      console.log(this.data.student);
       this.studentAdditionForm.patchValue({
         name: this.data.student.name.split(' ')[0],
         surname: this.data.student.name.split(' ')[1],
@@ -47,6 +47,9 @@ export class StudentAdditionComponent implements OnInit {
       this.data.student.preferences.forEach((preference) => {
         preferenceArray.push(new FormControl(preference));
       });
+      this.isImageExisting = true;
+    } else {
+      this.studentAdditionForm.patchValue({image: this.imageUrl});
     }
   }
 
@@ -77,6 +80,9 @@ export class StudentAdditionComponent implements OnInit {
   get surname() {
     return this.studentAdditionForm.get('surname') as FormControl;
   }
+  get image(){
+    return this.studentAdditionForm.get('image') as FormControl;
+  }
 
   close() {
     this.dialogRef.close(null);
@@ -85,21 +91,27 @@ export class StudentAdditionComponent implements OnInit {
   onFileSelected(event) {
     const selectedFile = event.target.files[0];
     if (selectedFile !== null) {
+      this.isImageExisting = true;
       this.selectedFile = selectedFile;
       this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl((URL).createObjectURL(this.selectedFile));
+      this.studentAdditionForm.patchValue({image: this.imageUrl});
     }
+    this.isImageChanged = true;
   }
 
   onSubmit() {
-    const formData = new FormData();
-    formData.append('upload_preset', 'evaluator-upload');
-    formData.append('file', this.selectedFile);
-    this.httpClient.post('https://api.cloudinary.com/v1_1/ignaspan/upload', formData, {
-      // observe: 'body'
-    })
-      .subscribe((body: any) => {
+    if (this.isImageChanged) {
+      const formData = new FormData();
+      formData.append('upload_preset', 'evaluator-upload');
+      formData.append('file', this.selectedFile);
+      this.httpClient.post('https://api.cloudinary.com/v1_1/ignaspan/upload', formData, {})
+        .subscribe((body: any) => {
           this.studentAdditionForm.value.image = body.url;
-          this.dialogRef.close( this.studentAdditionForm.value);
-      });
+          this.dialogRef.close(this.studentAdditionForm.value);
+        });
+      this.isImageChanged = false;
+    } else {
+      this.dialogRef.close(this.studentAdditionForm.value);
+    }
   }
 }
