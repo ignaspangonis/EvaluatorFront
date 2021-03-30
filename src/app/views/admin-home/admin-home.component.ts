@@ -35,9 +35,9 @@ export class AdminHomeComponent implements OnInit {
       data: {str: stream},
       width: '400px',
       height: '400px'
-    }).afterClosed().subscribe((response: any) => {
-      if (response != null) {
-      mentors.splice(0, 0, response.mentor);
+    }).afterClosed().subscribe((responseVariable: any) => {
+      if (responseVariable != null) {
+      mentors.splice(0, 0, responseVariable.mentor);
       }
     });
    }
