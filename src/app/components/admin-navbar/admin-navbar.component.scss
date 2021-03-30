@@ -1,12 +1,14 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  //justify-content: left;
+  margin-left: auto;
+  padding-right: 0;
 
   div {
     display: flex;
-    a {
-      padding-left: 0;
+    margin: 0 15%;
+    #exit {
+      margin: auto 20px;
     }
   }
 }
@@ -17,12 +19,15 @@
   padding-bottom: 10px;
 }
 
-.navbar .exit {
-  margin-left: auto;
-  padding-right: 0;
-}
+
 
 .admin-label {
   color: antiquewhite;
   margin-right: 20px;
+  margin-top: 1px;
+  font-weight: 100;
+  font-size: 18px;
+  b {
+    font-weight: 500;
+  }
 }
