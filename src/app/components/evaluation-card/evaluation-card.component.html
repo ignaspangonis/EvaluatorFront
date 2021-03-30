@@ -65,6 +65,15 @@
       <ng-template #absentQA>No evaluations in this stream yet!</ng-template>
     </div>
   </div>
+  <mat-divider></mat-divider>
+  <div *ngIf="data.stud.preferences.length > 0">
+    <h2>Student preferences:</h2>
+    <p>{{data.stud.preferences}}</p>
+  </div>
+  <div *ngIf="data.stud.contractType">
+    <h2>Contract Type:</h2>
+    <p>{{data.stud.contractType}}</p>
+  </div>
 </div>
 <!--<div>-->
 <!--  Card: {{ card | json }}-->
