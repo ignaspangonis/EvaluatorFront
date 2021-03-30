@@ -56,7 +56,7 @@ export class AdminHomeComponent implements OnInit {
         if (!isStudentExisting) {
           this.studentService.addStudent(this.newStudent).subscribe(() => this.students$ = this.studentService.getAllStudents());
         } else {
-          this.studentService.updateStudent(this.newStudent, this.newStudent.id)
+          this.studentService.updateStudent(this.newStudent, student.id)
             .subscribe(() => this.students$ = this.studentService.getAllStudents());
         }
       }
