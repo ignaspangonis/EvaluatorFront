@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
     this.isEvaluationSaved = this.evaluationService.getIsEvaluationSaved();
 
     if (this.isEvaluationSaved) {
-      this.snackBar.open('Your evaluation has been saved', 'close', {
+      this.snackBar.open('Your evaluation has been saved', 'Close', {
         duration: 6000,
       });
       this.isEvaluationSaved = false;
