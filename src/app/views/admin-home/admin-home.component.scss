@@ -16,13 +16,17 @@ p {
     border-radius: 0 0 30px 30px;
     margin: 0 15% auto 15%;
     padding: 20px;
-    min-height: 70vh;
+    min-height: 100vh;
   }
 }
 
 .example-card {
   max-width: 240px;
-  margin-right: 20px;
+  margin-right: 18px;
+  margin-left: 18px;
+  height: 370px;
+  padding-bottom: 0;
+
 }
 
 .card {
@@ -33,12 +37,14 @@ p {
   margin-top: 20px;
 
   > div {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
   }
 }
 
 .mat-card-title {
   text-align: center;
+  font-size: 1.5em;
+  width: 100%;
 }
 
 ::ng-deep .mat-tab-label {
@@ -46,14 +52,17 @@ p {
 }
 
 .mentors-card {
-  width: 25%;
-  margin-right: 40px;
+  //width: 25%;
+  width: 240px;
+  margin-right: 20px;
 
 }
 
 .mentors-cards {
-  margin-left: 10%;
+  margin-left: 20px;
   margin-top: 30px;
+  //margin-right: 20px;
+  margin-bottom: 30px;
 }
 
 .add-button {
@@ -61,7 +70,7 @@ p {
 }
 
 .mentor-card-buttons {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .add {
@@ -73,9 +82,19 @@ p {
 .editDelete {
   display: flex;
   justify-content: center;
+  margin-bottom: 0px;
 }
 
 mat-spinner {
   margin: 20% auto auto auto;
+}
+
+.streams-and-mentors{
+  display: flex;
+  justify-content: center;
+}
+
+.delete-mentor-button{
+  margin-top: 10px;
 }
 
