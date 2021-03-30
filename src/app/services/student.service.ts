@@ -21,7 +21,7 @@ export class StudentService {
   }
 
   updateStudent(student: Student, id: string){
-    return this.httpClient.put<Student>('https://my-evaluation-platform.herokuapp.com/api/student' + id, student);
+    return this.httpClient.put<Student>('https://my-evaluation-platform.herokuapp.com/api/student/' + id, student);
   }
 
   getAllStudents(): Observable<Student[]> {
