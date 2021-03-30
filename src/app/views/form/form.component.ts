@@ -1,16 +1,14 @@
+import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Observable, Subscription, concat, of} from 'rxjs';
 
-
+import {Evaluation} from '../../shared/evaluation';
+import {EvaluationService} from '../../services/evaluation.service';
+import {Router} from '@angular/router';
 import {Student} from 'src/app/shared/student';
 import {StudentService} from '../../services/student.service';
-import {concat, Observable, of} from 'rxjs';
-import {ActivatedRoute, ParamMap} from '@angular/router';
-import {Evaluation} from '../../shared/evaluation';
-
 import {map} from 'rxjs/operators';
-import {Router} from '@angular/router';
-import {EvaluationService} from '../../services/evaluation.service';
 
 @Component({
   selector: 'app-form',
@@ -18,6 +16,9 @@ import {EvaluationService} from '../../services/evaluation.service';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
+  subscription1$: Subscription;
+  subscription2$: Subscription;
+  subscription3$: Subscription;
   profileForm: FormGroup;
   student$: Observable<Student>;
   mentorId: string;
@@ -37,14 +38,14 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(
+    this.subscription1$ = this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.id = params.get('id');
         this.mentorId = params.get('mentorId');
         this.student$ = this.studentService.getStudentById(this.id);
       });
 
-    this.route.queryParams.subscribe(params => {
+    this.subscription2$ = this.route.queryParams.subscribe(params => {
       this.isEvaluated = params['isEvaluated'] === 'true';
     });
 
@@ -60,7 +61,6 @@ export class FormComponent implements OnInit {
 
     if (this.isEvaluated === true) {
       this.studentService.getEvaluation(this.id, this.mentorId).subscribe((evaluation) => {
-
         this.evaluation = evaluation;
         this.profileForm.patchValue({
           mentorID: this.evaluation.mentorID,
@@ -140,4 +140,10 @@ export class FormComponent implements OnInit {
     );
     firstInvalidControl.scrollIntoView({behavior: 'smooth', block: 'center'});
   }
+
+  ngOnDestroy() {
+    this.subscription1$.unsubscribe();
+    this.subscription2$.unsubscribe();
+  }
+  
 }

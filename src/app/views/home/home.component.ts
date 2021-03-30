@@ -1,16 +1,15 @@
+import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Component, Input, OnInit} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 
 import {EvaluationCardComponent} from '../../components/evaluation-card/evaluation-card.component';
 import {EvaluationService} from '../../services/evaluation.service';
 import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Mentor} from 'src/app/shared/mentor';
 import {MentorService} from 'src/app/services/mentor.service';
-import {Observable} from 'rxjs';
 import {Student} from 'src/app/shared/student';
 import {StudentService} from 'src/app/services/student.service';
-import {ActivatedRoute, ParamMap} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
-
 
 @Component({
   selector: 'app-home',
@@ -18,6 +17,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  subscription: Subscription;
   isEvaluationSaved: boolean;
   students$: Observable<Student[]>;
   mentor: Mentor;
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
                   private evaluationService: EvaluationService, private snackBar: MatSnackBar, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(
+    this.subscription = this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.mentorId = params.get('mentorId');
       });
@@ -61,5 +61,9 @@ export class HomeComponent implements OnInit {
         this.mentorStream = this.mentor.stream;
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

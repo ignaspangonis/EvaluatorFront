@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 import {Mentor} from '../../shared/mentor';
 import {MentorService} from '../../services/mentor.service';
 import {Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-identification',
@@ -11,6 +12,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./identification.component.scss']
 })
 export class IdentificationComponent implements OnInit {
+  subscription: Subscription;
   mentors: Mentor[];
   mentor: Mentor;
   identificationForm: FormGroup;
@@ -21,11 +23,15 @@ export class IdentificationComponent implements OnInit {
       selectedMentor: ['', {validators: [Validators.required]}]
     });
 
-    this.mentorService.getMentors().subscribe((mentors) => {this.mentors = mentors; } );
+    this.subscription = this.mentorService.getMentors().subscribe((mentors) => {this.mentors = mentors; } );
 
   }
 
   get selectedMentor() {
     return this.identificationForm.get('selectedMentor');
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MentorService} from '../../services/mentor.service';
 import {Mentor} from '../../shared/mentor';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-mentor-addition',
@@ -11,6 +12,7 @@ import {Mentor} from '../../shared/mentor';
 })
 export class MentorAdditionComponent implements OnInit {
   mentorAdditionForm: FormGroup;
+  subscription: Subscription;
   newMentor: Mentor = {name: '', stream: ''};
   constructor(@Inject(MAT_DIALOG_DATA) public data: {str: string}, private fb: FormBuilder, private mentorService: MentorService,
               public dialogRef: MatDialogRef<MentorAdditionComponent>) {
@@ -26,7 +28,7 @@ export class MentorAdditionComponent implements OnInit {
   onSubmit() {
     this.newMentor.name = this.mentorAdditionForm.value.name + ' ' + this.mentorAdditionForm.value.surname;
     this.newMentor.stream = this.data.str;
-    this.mentorService.addMentor(this.newMentor).subscribe((mentor) => {this.newMentor.id = mentor.id ;
+    this.subscription = this.mentorService.addMentor(this.newMentor).subscribe((mentor) => {this.newMentor.id = mentor.id ;
                                                                         this.dialogRef.close({mentor: this.newMentor});
     } );
   }
@@ -45,4 +47,7 @@ export class MentorAdditionComponent implements OnInit {
     return this.mentorAdditionForm.get('stream') as FormControl;
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }
