@@ -1,8 +1,6 @@
-
 import {Component, Input, OnInit} from '@angular/core';
 import {MentorService} from '../../services/mentor.service';
 import {Mentor} from '../../shared/mentor';
-import {MatDialog} from '@angular/material/dialog';
 import {Observable} from 'rxjs';
 
 @Component({

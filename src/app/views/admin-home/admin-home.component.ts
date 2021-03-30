@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 import {Student} from '../../shared/student';
 import { StudentAdditionComponent } from 'src/app/components/student-addition/student-addition.component';
 import {StudentService} from '../../services/student.service';
-import {response} from 'express';
+
 
 @Component({
   selector: 'app-admin-home',
@@ -48,7 +48,6 @@ export class AdminHomeComponent implements OnInit {
       height: '600px'
     }).afterClosed().subscribe((formData: any) => {
       if (formData != null) {
-        console.log(formData.name);
         this.newStudent.name = formData.name + ' ' + formData.surname;
         this.newStudent.image = formData.image;
         this.newStudent.preferences = formData.preferences;
