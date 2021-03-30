@@ -1,13 +1,67 @@
 <div id="top">
-  <h1 mat-dialog-title>{{ data.stud.name }} evaluation card</h1>
+  <h1 mat-dialog-title>Student evaluation card</h1>
   <div id="btn" mat-dialog-actions>
     <button mat-button mat-dialog-close color="primary">Close</button>
   </div>
 </div>
-<img src="{{data.stud.image}}" alt="{{data.stud.name}}">
-<div mat-dialog-content>
-  <h2>Streams</h2>
-  <div *ngIf="card != null; else loading">
+
+<div mat-dialog-content *ngIf="card != null; else loading">
+
+  <div class="grid-container">
+
+    <img src="{{data.stud.image}}" alt="{{data.stud.name}}">
+    <h1 class="name">{{ data.stud.name }}</h1>
+    <div class="prefs">
+      <div *ngIf="data.stud.preferences.length > 0; else noInterests">
+        <span>Interests:</span>
+        <span *ngFor="let pref of data.stud.preferences; let i = index"><span *ngIf="i!=0">, </span>
+          {{ pref }}
+        </span>.
+      </div>
+      <ng-template #noInterests>No interests yet</ng-template>
+      <div *ngIf="data.stud.contractType">
+        Contract Type: {{ data.stud.contractType }}.
+      </div>
+    </div>
+
+    <div class="evaluations">
+      <div>Average ratings (max 4):</div>
+      <div>
+        FE:
+        <span *ngIf="card.feEvaluationDTO != null; else noFe">
+          {{ this.parse(this.card?.feEvaluationDTO?.jointEvaluation) }}
+          ({{ this.card?.feEvaluationDTO?.evaluationsCount }}
+          evaluation<span *ngIf="this.card?.feEvaluationDTO?.evaluationsCount != 1">s</span>)
+        </span>
+        <ng-template #noFe>
+          no evaluations yet.
+        </ng-template>
+      </div>
+      <div>
+        BE:
+        <span *ngIf="card.beEvaluationDTO != null; else noBe">
+          {{ this.parse(this.card?.beEvaluationDTO?.jointEvaluation) }}
+          ({{ this.card?.beEvaluationDTO?.evaluationsCount }}
+          evaluation<span *ngIf="this.card?.beEvaluationDTO?.evaluationsCount != 1">s</span>)
+        </span>
+        <ng-template #noBe>
+          no evaluations yet.
+        </ng-template>
+      </div>
+      <div>
+        QA:
+        <span *ngIf="card.qaEvaluationDTO != null; else noQa">
+          {{ this.parse(this.card?.qaEvaluationDTO?.jointEvaluation) }}
+          ({{ this.card?.qaEvaluationDTO?.evaluationsCount }}
+          evaluation<span *ngIf="this.card?.qaEvaluationDTO?.evaluationsCount != 1">s</span>)
+        </span>
+        <ng-template #noQa>
+          no evaluations yet.
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div>
     <apx-chart
       [series]="chartOptions.series"
       [chart]="chartOptions.chart"
@@ -24,9 +78,7 @@
              card.qaEvaluationDTO != null"
     ></apx-chart>
   </div>
-  <ng-template #loading id="loading">
-    <mat-spinner [diameter]="40"></mat-spinner>
-  </ng-template>
+
   <div class="stream-section" *ngIf="card">
     <div class="stream">
       <h3>Frontend</h3>
@@ -65,16 +117,10 @@
       <ng-template #absentQA>No evaluations in this stream yet!</ng-template>
     </div>
   </div>
-  <mat-divider></mat-divider>
-  <div *ngIf="data.stud.preferences.length > 0">
-    <h2>Student preferences:</h2>
-    <p>{{data.stud.preferences}}</p>
-  </div>
-  <div *ngIf="data.stud.contractType">
-    <h2>Contract Type:</h2>
-    <p>{{data.stud.contractType}}</p>
-  </div>
 </div>
+<ng-template #loading id="loading">
+  <mat-spinner [diameter]="40"></mat-spinner>
+</ng-template>
 <!--<div>-->
 <!--  Card: {{ card | json }}-->
 <!--</div>-->
