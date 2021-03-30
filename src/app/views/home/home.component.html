@@ -12,7 +12,7 @@
           <mat-card class="example-card" *ngIf="!student.evaluated">
             <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
             <mat-card-title>{{student.name}}</mat-card-title>
-            <mat-card-actions>
+            <mat-card-actions class="evaluateView">
               <a mat-raised-button color="primary" [routerLink]="['/mentor/', mentorId, 'student', student.id]" [queryParams]= "{isEvaluated: 'false'}">Evaluate student</a>
               <button mat-raised-button color="accent" (click)="openDialog(student)">View card</button>
             </mat-card-actions>
@@ -26,7 +26,7 @@
           <mat-card class="example-card" *ngIf="student.evaluated">
             <img mat-card-image src="{{student.image}}" alt="{{student.name}}">
             <mat-card-title>{{student.name}}</mat-card-title>
-            <mat-card-actions>
+            <mat-card-actions class="evaluateView">
               <a mat-raised-button color="primary" [routerLink]="['/mentor/', mentorId, 'student', student.id]" [queryParams]= "{isEvaluated: 'true'}">Edit evaluation</a>
               <button mat-raised-button color="accent" (click)="openDialog(student)">View card</button>
             </mat-card-actions>

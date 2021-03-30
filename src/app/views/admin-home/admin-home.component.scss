@@ -38,5 +38,13 @@ p {
 .mentor-card-buttons{
   margin-top: 20px;
 }
+.add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-
+.editDelete {
+  display: flex;
+  justify-content: space-between;
+}

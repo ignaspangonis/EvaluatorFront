@@ -17,6 +17,7 @@ import {
   ApexTooltip
 } from 'ng-apexcharts';
 import {take} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -37,7 +38,6 @@ export type ChartOptions = {
   styleUrls: ['./evaluation-card.component.scss']
 })
 export class EvaluationCardComponent implements OnInit {
-
   card: EvaluationCard;
   @ViewChild('chart') chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
@@ -133,5 +133,4 @@ export class EvaluationCardComponent implements OnInit {
     if (value === null || value === undefined) { return 0; }
     return parseFloat(value.toFixed(1));
   }
-
 }
