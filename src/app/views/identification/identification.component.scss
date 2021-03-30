@@ -12,14 +12,28 @@ form {
 
 .go-button{
   margin-left: 10px;
+  padding: 8px;
+  margin-bottom: 20px;
 }
 
 .navbar{
   font-size: 1.5em;
+  div {
+    margin-left: 15%;
+    font-weight: 100;
+    font-size: 18px;
+    b {
+      font-weight: 500;
+    }
+  }
 }
 
 .admin-button{
   position: absolute;
-  right: 250px;
-  top: 100px;
+  right: 15%;
+  top: 14px;
+}
+#mentor {
+  display: flex;
+  align-items: center;
 }
