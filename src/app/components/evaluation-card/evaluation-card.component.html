@@ -1,11 +1,11 @@
 <div id="top">
-  <h1 mat-dialog-title>Student evaluation card</h1>
+  <h1 mat-dialog-title><b>Student evaluation card</b></h1>
   <div id="btn" mat-dialog-actions>
     <button mat-button mat-dialog-close color="primary">Close</button>
   </div>
 </div>
 
-<div mat-dialog-content *ngIf="card != null; else loading">
+<div mat-dialog-content class="wrapper" *ngIf="card != null; else loading">
 
   <div class="grid-container">
 
@@ -13,19 +13,20 @@
     <h1 class="name">{{ data.stud.name }}</h1>
     <div class="prefs">
       <div *ngIf="data.stud.preferences.length > 0; else noInterests">
-        <span>Interests:</span>
+        <span><b>Interests:</b></span>
         <span *ngFor="let pref of data.stud.preferences; let i = index"><span *ngIf="i!=0">, </span>
           {{ pref }}
         </span>.
       </div>
-      <ng-template #noInterests>No interests yet</ng-template>
-      <div *ngIf="data.stud.contractType">
-        Contract Type: {{ data.stud.contractType }}.
+      <ng-template #noInterests>No interests provided yet</ng-template>
+      <div *ngIf="data.stud.contractType; else noContractType">
+        <b>Contract Type:</b> {{ data.stud.contractType }}.
       </div>
+      <ng-template #noContractType>No contract type provided yet</ng-template>
     </div>
 
     <div class="evaluations">
-      <div>Average ratings (max 4):</div>
+      <div><b>Average ratings</b> (max 4):</div>
       <div>
         FE:
         <span *ngIf="card.feEvaluationDTO != null; else noFe">
@@ -79,44 +80,36 @@
     ></apx-chart>
   </div>
 
-  <div class="stream-section" *ngIf="card">
-    <div class="stream">
-      <h3>Frontend</h3>
-      <div *ngIf="card.feEvaluationDTO; else absentFront">
-        <div class="mat-h4">Evaluation count: {{card.feEvaluationDTO.evaluationsCount}}</div>
-        <div class="mat-h4">Comments:
-          <div *ngFor="let comment of card.feEvaluationDTO.comments; let i1 = index">
-            <div id="{{i1}}">{{comment}}</div>
-          </div>
-        </div>
-      </div>
+  <h1 id="comments-header">Comments</h1>
+  <mat-tab-group class="stream-section" mat-align-tabs="center" *ngIf="card">
+    <mat-tab label="Front-end" class="stream">
+      <mat-list *ngIf="card.feEvaluationDTO; else absentFront">
+        <mat-list-item *ngFor="let comment of card.feEvaluationDTO.comments; let i1 = index">
+          <div id="{{i1}}"><i>"{{ comment }}"</i></div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
       <ng-template #absentFront>No evaluations in this stream yet!</ng-template>
-    </div>
-    <div class="stream">
-      <h3>Backend</h3>
-      <div *ngIf="card.beEvaluationDTO; else absentBack">
-        <div class="mat-h4">Evaluation count: {{card.beEvaluationDTO.evaluationsCount}}</div>
-        <div class="mat-h4">Comments:
-          <div *ngFor="let comment of card.beEvaluationDTO.comments; let i2 = index">
-            <div id="{{i2}}">{{comment}}</div>
-          </div>
-        </div>
-      </div>
-      <ng-template #absentBack>No evaluations in this stream yet!</ng-template>
-    </div>
-    <div class="stream">
-      <h3>QA</h3>
-      <div *ngIf="card.qaEvaluationDTO; else absentQA">
-        <div class="mat-h4">Evaluation count: {{card.qaEvaluationDTO.evaluationsCount}}</div>
-        <div class="mat-h4">Comments:
-          <div *ngFor="let comment of card.qaEvaluationDTO.comments; let i3 = index">
-            <div id="{{i3}}">{{comment}}</div>
-          </div>
-        </div>
-      </div>
+    </mat-tab>
+    <mat-tab label="Back-end" class="stream">
+      <mat-list *ngIf="card.beEvaluationDTO; else absentBack">
+          <mat-list-item *ngFor="let comment of card.beEvaluationDTO.comments; let i2 = index">
+            <div id="{{i2}}"><i>"{{ comment }}"</i></div>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+      </mat-list>
+      <ng-template class="comment-absent" #absentBack>No evaluations in this stream yet!</ng-template>
+    </mat-tab>
+    <mat-tab label="QA" class="stream">
+      <mat-list *ngIf="card.qaEvaluationDTO; else absentQA">
+          <mat-list-item *ngFor="let comment of card.qaEvaluationDTO.comments; let i3 = index">
+            <div id="{{i3}}"><i>"{{ comment }}"</i></div>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+      </mat-list>
       <ng-template #absentQA>No evaluations in this stream yet!</ng-template>
-    </div>
-  </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>
 <ng-template #loading id="loading">
   <mat-spinner [diameter]="40"></mat-spinner>
