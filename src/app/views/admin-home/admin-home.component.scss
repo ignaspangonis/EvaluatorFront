@@ -26,6 +26,11 @@ p {
   margin-left: 18px;
   height: 370px;
   padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+mat-card {
+  margin-bottom: 24px;
 }
 
 .card {
@@ -81,7 +86,7 @@ p {
 .editDelete {
   display: flex;
   justify-content: center;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 mat-spinner {

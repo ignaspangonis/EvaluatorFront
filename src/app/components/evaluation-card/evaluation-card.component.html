@@ -89,7 +89,7 @@
           <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list>
-      <ng-template #absentFront>No evaluations in this stream yet!</ng-template>
+      <ng-template class="comment-absent" #absentFront><i>No evaluations in this stream yet!</i></ng-template>
     </mat-tab>
     <mat-tab label="Back-end" class="stream">
       <mat-list *ngIf="card.beEvaluationDTO; else absentBack">
@@ -98,7 +98,7 @@
             <mat-divider></mat-divider>
           </mat-list-item>
       </mat-list>
-      <ng-template class="comment-absent" #absentBack>No evaluations in this stream yet!</ng-template>
+      <ng-template class="comment-absent" #absentBack><i>No evaluations in this stream yet!</i></ng-template>
     </mat-tab>
     <mat-tab label="QA" class="stream">
       <mat-list *ngIf="card.qaEvaluationDTO; else absentQA">
@@ -107,7 +107,7 @@
             <mat-divider></mat-divider>
           </mat-list-item>
       </mat-list>
-      <ng-template #absentQA>No evaluations in this stream yet!</ng-template>
+      <ng-template class="comment-absent" #absentQA><i>No evaluations in this stream yet!</i></ng-template>
     </mat-tab>
   </mat-tab-group>
 </div>

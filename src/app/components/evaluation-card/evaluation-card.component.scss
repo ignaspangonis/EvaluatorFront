@@ -80,8 +80,9 @@ mat-list, mat-list-item {
   width: 100%;
 }
 
-mat-list-item, .comment-absent {
+mat-list-item, .comment-absent, i {
   margin: 12px auto;
+  padding-right: 20px;
 }
 
 .grid-container {
