@@ -5,13 +5,15 @@
     <!--  Value: {{ profileForm.value | json }}-->
     <!--  <hr>-->
       <div class="mat-display-2">Student form</div>
-      <mat-card class="example-card" *ngIf="student$ | async as student">
+    <div class="student-image-name" *ngIf="student$ | async as student">
+      <mat-card class="example-card" >
         <img mat-card-image src="{{ student.image }}" alt="{{ student.name }}" />
-        <mat-card-header>
-          <mat-card-title>{{ student.name }}</mat-card-title>
-        </mat-card-header>
+<!--        <mat-card-header>-->
+<!--          <mat-card-title class = "student-name">{{ student.name }}</mat-card-title>-->
+<!--        </mat-card-header>-->
       </mat-card>
-
+      <h1 class = "student-name">{{ student.name }}</h1>
+    </div>
       <label for="participation" class="example-radio-group-label"
         >Participation</label
       >

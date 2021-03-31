@@ -1,90 +1,112 @@
-<app-admin-navbar></app-admin-navbar>
-
-<mat-tab-group mat-align-tabs="center">
-  <mat-tab label="Students">
-    <div class="card" *ngIf="students$ | async as students" >
-      <div class="card">
-        <mat-card class="example-card">
-          <img mat-card-image src="https://gladstoneentertainment.com/wp-content/uploads/2018/08/blank-portrait.png" alt="blank-portrait">
-          <mat-card-title></mat-card-title>
-          <mat-card-actions class="add">
-            <button mat-raised-button color="accent" class="addbutton" (click)="openStudentDialog(null, false)">Add student</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-      <div *ngFor="let student of students">
-        <mat-card class="example-card">
-          <img
-            mat-card-image
-            src="{{ student.image }}"
-            alt="{{ student.name }}"
-          />
-          <mat-card-title>{{ student.name }}</mat-card-title>
-          <mat-card-actions class="editDelete">
-            <button mat-raised-button color="primary" (click)="openStudentDialog(student, true)">Edit</button>
-            <button mat-raised-button color="warn" (click)="deleteStudent(student.id, student.name)">Delete</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-    </div>
-
-  </mat-tab>
-
-
-  <mat-tab label="Mentors">
-    <div class="card mentors-cards"  *ngIf="mentors$ | async as mentors">
-      <mat-card class="mentors-card">
-        <h2>Front-End stream:</h2>
-        <mat-divider></mat-divider>
-
-        <mat-selection-list #FEmentor >
-          <ng-container *ngFor="let mentor of mentors">
-          <mat-list-option *ngIf="mentor.stream == 'Front-end'" [value]="mentor">
-            <ng-container>
-              {{ mentor.name }}
-            </ng-container>
-
-          </mat-list-option>
-          </ng-container>
-        </mat-selection-list>
-        <div class="mentor-card-buttons">
-        <button mat-raised-button color="primary" class="add-button" (click)="openMentorDialog('Front-end', mentors)">Add mentor</button>
-        <button mat-raised-button color="warn" [disabled]="FEmentor.selectedOptions.selected.length==0" (click)="deleteMentors(FEmentor.selectedOptions.selected, mentors)">Delete</button>
+<div id="content-wrapper">
+  <app-admin-navbar></app-admin-navbar>
+  <div class="container" *ngIf="students$ | async as students; else loading">
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Students">
+        <div class="card">
+          <div>
+            <mat-card class="example-card">
+              <img mat-card-image src="https://gladstoneentertainment.com/wp-content/uploads/2018/08/blank-portrait.png"
+                   alt="blank-portrait">
+              <mat-card-title style="visibility: hidden">Dont delete me</mat-card-title>
+              <mat-card-actions class="add">
+                <button mat-raised-button color="accent" class="addbutton" (click)="openStudentDialog(null, false)">Add
+                  student
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+          <div *ngFor="let student of students">
+            <mat-card class="example-card">
+              <img
+                mat-card-image
+                src="{{ student.image }}"
+                alt="{{ student.name }}"
+              />
+              <mat-card-title>{{ student.name }}</mat-card-title>
+              <mat-card-actions class="editDelete">
+                <button mat-raised-button color="primary" (click)="openStudentDialog(student, true)">Edit</button>
+                <button mat-raised-button color="accent" (click)="deleteStudent(student.id, student.name)">Delete</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
         </div>
-      </mat-card>
+      </mat-tab>
 
-      <mat-card class="mentors-card">
-        <h2>Back-End stream:</h2>
-        <mat-divider></mat-divider>
-        <mat-selection-list #BEmentor>
-          <ng-container *ngFor="let mentor of mentors">
-            <mat-list-option *ngIf="mentor.stream == 'Back-end'" [value]="mentor">
-              <ng-container >
-                {{ mentor.name }}</ng-container></mat-list-option>
-          </ng-container>
-        </mat-selection-list>
-        <div class="mentor-card-buttons">
-          <button mat-raised-button color="primary" class="add-button" (click)="openMentorDialog('Back-end', mentors)">Add mentor</button>
-          <button mat-raised-button color="warn" [disabled]="BEmentor.selectedOptions.selected.length==0" (click)="deleteMentors(BEmentor.selectedOptions.selected, mentors)">Delete</button>
+      <mat-tab label="Mentors">
+        <div class = "streams-and-mentors">
+        <div class="card mentors-cards" *ngIf="mentors$ | async as mentors">
+          <mat-card class="mentors-card">
+            <h2>Front-End stream:</h2>
+            <mat-divider></mat-divider>
+
+            <mat-selection-list #FEmentor>
+              <ng-container *ngFor="let mentor of mentors">
+                <mat-list-option *ngIf="mentor.stream == 'Front-end'" [value]="mentor">
+                  <ng-container>
+                    {{ mentor.name }}
+                  </ng-container>
+
+                </mat-list-option>
+              </ng-container>
+            </mat-selection-list>
+            <div class="mentor-card-buttons">
+              <button mat-raised-button color="primary" class="add-button"
+                      (click)="openMentorDialog('Front-end', mentors)">Add mentor
+              </button>
+              <button mat-raised-button color="warn" class="delete-mentor-button" [disabled]="FEmentor.selectedOptions.selected.length==0"
+                      (click)="deleteMentors(FEmentor.selectedOptions.selected, mentors)">Delete selected
+              </button>
+            </div>
+          </mat-card>
+
+          <mat-card class="mentors-card">
+            <h2>Back-End stream:</h2>
+            <mat-divider></mat-divider>
+            <mat-selection-list #BEmentor>
+              <ng-container *ngFor="let mentor of mentors">
+                <mat-list-option *ngIf="mentor.stream == 'Back-end'" [value]="mentor">
+                  <ng-container>
+                    {{ mentor.name }}</ng-container>
+                </mat-list-option>
+              </ng-container>
+            </mat-selection-list>
+            <div class="mentor-card-buttons">
+              <button mat-raised-button color="primary" class="add-button"
+                      (click)="openMentorDialog('Back-end', mentors)">Add mentor
+              </button>
+              <button mat-raised-button color="warn" class="delete-mentor-button" [disabled]="BEmentor.selectedOptions.selected.length==0"
+                      (click)="deleteMentors(BEmentor.selectedOptions.selected, mentors)">Delete selected
+              </button>
+            </div>
+          </mat-card>
+
+          <mat-card class="mentors-card">
+            <h2>Quality assurance stream:</h2>
+            <mat-divider></mat-divider>
+            <mat-selection-list #QAmentor>
+              <ng-container *ngFor="let mentor of mentors">
+                <mat-list-option *ngIf="mentor.stream == 'QA'" [value]="mentor">
+                  <ng-container>
+                    {{ mentor.name }}</ng-container>
+                </mat-list-option>
+              </ng-container>
+            </mat-selection-list>
+            <div class="mentor-card-buttons">
+              <button mat-raised-button color="primary" class="add-button" (click)="openMentorDialog('QA', mentors)">Add
+                mentor
+              </button>
+              <button mat-raised-button class="delete-mentor-button" color="warn" [disabled]="QAmentor.selectedOptions.selected.length==0"
+                      (click)="deleteMentors(QAmentor.selectedOptions.selected, mentors)">Delete selected
+              </button>
+            </div>
+          </mat-card>
         </div>
-      </mat-card>
-
-      <mat-card class="mentors-card">
-        <h2>Quality assurance stream:</h2>
-        <mat-divider></mat-divider>
-        <mat-selection-list #QAmentor>
-          <ng-container *ngFor="let mentor of mentors">
-            <mat-list-option *ngIf="mentor.stream == 'QA'" [value]="mentor">
-              <ng-container >
-                {{ mentor.name }}</ng-container></mat-list-option>
-          </ng-container>
-        </mat-selection-list>
-        <div class="mentor-card-buttons">
-          <button mat-raised-button color="primary" class="add-button" (click)="openMentorDialog('QA', mentors)">Add mentor</button>
-          <button mat-raised-button color="warn" [disabled]="QAmentor.selectedOptions.selected.length==0" (click)="deleteMentors(QAmentor.selectedOptions.selected, mentors)">Delete</button>
         </div>
-      </mat-card>
-    </div>
-  </mat-tab>
-
-</mat-tab-group>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <ng-template #loading id="loading">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </ng-template>
+</div>

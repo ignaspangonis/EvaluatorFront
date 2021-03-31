@@ -72,7 +72,7 @@ export class AdminHomeComponent implements OnInit {
 
    deleteStudent(studentId: number, studentName: string){
     if ( confirm('Are you sure you want to delete ' + studentName + ' ?')) {
-      this.studentService.deleteStudent(studentId).subscribe(() => this.students$ = this.studentService.getAllStudents());
+        this.studentService.deleteStudent(studentId).subscribe(() => this.students$ = this.studentService.getAllStudents());
       }
     }
 }

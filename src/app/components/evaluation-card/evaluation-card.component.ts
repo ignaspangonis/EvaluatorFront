@@ -77,12 +77,6 @@ export class EvaluationCardComponent implements OnInit {
           data: [this.parse(this.card.feEvaluationDTO?.extraMile),
             this.parse(this.card.beEvaluationDTO?.extraMile),
             this.parse(this.card.qaEvaluationDTO?.extraMile)]
-        },
-        {
-          name: 'Joint evaluation',
-          data: [this.parse(this.card.feEvaluationDTO?.jointEvaluation),
-            this.parse(this.card.beEvaluationDTO?.jointEvaluation),
-            this.parse(this.card.qaEvaluationDTO?.jointEvaluation)]
         }
       ],
       chart: {

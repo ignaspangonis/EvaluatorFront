@@ -15,10 +15,18 @@ form {
   align-items: flex-start;
 }
 
-
 .container {
   background: #f5f5f5;
   padding: 40px;
+}
+
+.student-image-name{
+  display: flex;
+  align-items: center;
+}
+
+.student-name{
+  margin-left: 20px;
 }
 
 .example-radio-group {

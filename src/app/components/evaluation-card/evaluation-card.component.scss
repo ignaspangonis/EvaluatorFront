@@ -1,6 +1,40 @@
+.grid-container {
+  //width: 900px;
+  display: grid;
+  grid-template-columns: minmax(45px, 1fr) minmax(45px, 2fr) minmax(45px, 2fr);
+  grid-template-rows: minmax(45px, 1fr) minmax(45px, 1fr);
+  gap: 0 0;
+  grid-template-areas:
+    "image name name"
+    "image prefs evaluations";
+  img {
+    grid-area: image;
+    min-width: 45px;
+    width: 100%;
+  }
+
+  .name {
+    grid-area: name;
+    padding-left: 16px;
+    margin: auto auto 2px 0;
+  }
+
+  .prefs {
+    grid-area: prefs;
+    padding-left: 16px;
+  }
+
+  .evaluations {
+    grid-area: evaluations;
+    padding-left: 16px;
+  }
+}
+
+
+
+
 img {
   width: 100px;
-  border-radius: 50%;
 }
 .stream-section {
   display: flex;
@@ -24,7 +58,7 @@ h1 {
 }
 
 mat-spinner {
-  margin: auto;
+  margin: 200px auto auto auto;
 }
 
 h3 {
