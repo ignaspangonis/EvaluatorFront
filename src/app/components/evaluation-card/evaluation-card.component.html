@@ -16,11 +16,11 @@
         <span><b>Interests:</b></span>
         <span *ngFor="let pref of data.stud.preferences; let i = index"><span *ngIf="i!=0">, </span>
           {{ pref }}
-        </span>.
+        </span>
       </div>
       <ng-template #noInterests>No interests provided yet</ng-template>
       <div *ngIf="data.stud.contractType; else noContractType">
-        <b>Contract Type:</b> {{ data.stud.contractType }}.
+        <b>Contract Type:</b> {{ data.stud.contractType }}
       </div>
       <ng-template #noContractType>No contract type provided yet</ng-template>
     </div>
@@ -35,7 +35,7 @@
           evaluation<span *ngIf="this.card?.feEvaluationDTO?.evaluationsCount != 1">s</span>)
         </span>
         <ng-template #noFe>
-          no evaluations yet.
+          no evaluations yet
         </ng-template>
       </div>
       <div>
@@ -46,7 +46,7 @@
           evaluation<span *ngIf="this.card?.beEvaluationDTO?.evaluationsCount != 1">s</span>)
         </span>
         <ng-template #noBe>
-          no evaluations yet.
+          no evaluations yet
         </ng-template>
       </div>
       <div>
@@ -57,7 +57,7 @@
           evaluation<span *ngIf="this.card?.qaEvaluationDTO?.evaluationsCount != 1">s</span>)
         </span>
         <ng-template #noQa>
-          no evaluations yet.
+          no evaluations yet
         </ng-template>
       </div>
     </div>
