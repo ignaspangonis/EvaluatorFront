@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
+import { FormBuilder } from '@angular/forms';
 import { MentorAdditionComponent } from './mentor-addition.component';
 
 describe('MentorAdditionComponent', () => {
@@ -8,7 +11,17 @@ describe('MentorAdditionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MentorAdditionComponent ]
+      declarations: [ MentorAdditionComponent ],
+      imports: [
+        MatDialogModule
+      ],
+      providers: [
+        HttpClient,
+        HttpHandler,
+        FormBuilder,
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} }
+    ]
     })
     .compileComponents();
   });
