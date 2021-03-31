@@ -28,7 +28,7 @@
     <div class="evaluations">
       <div><b>Average ratings</b> (max 4):</div>
       <div>
-        Front-end:
+        FE:
         <span *ngIf="card.feEvaluationDTO != null; else noFe">
           {{ this.parse(this.card?.feEvaluationDTO?.jointEvaluation) }}
           ({{ this.card?.feEvaluationDTO?.evaluationsCount }}
@@ -39,7 +39,7 @@
         </ng-template>
       </div>
       <div>
-        Back-end:
+        BE:
         <span *ngIf="card.beEvaluationDTO != null; else noBe">
           {{ this.parse(this.card?.beEvaluationDTO?.jointEvaluation) }}
           ({{ this.card?.beEvaluationDTO?.evaluationsCount }}
